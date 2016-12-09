@@ -1,12 +1,12 @@
 language: java
 jdk:
 - oraclejdk8
-#deploy:
-#  provider: heroku
-#  api_key:
-#    secure:
-#  app: wepa
-#  on:
-#    repo: wametsol/wepa
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+- mvn clean cobertura:cobertura coveralls:report
+deploy:
+  provider: heroku
+  api_key:
+    secure: "YWe9DtvHBqRbfPX6O1EEKcWuflPn3wUjtPLJVSmTgEYMa6TZSAbLMSQhBNIS3Ir3Pq7aL+Y5LEU1/IjztMbz/WbNoG3uoXDg7D9xZdE5HLNAeKwE0T9l5aFfzlAc+EYTnvwhi1MSmb6XWvhChmNhuxyf1o3bVNPbxQh2BqB7ch1dU6sJwrxEzWQS0hgIaw8RaHS+kFMp0nOsbUEjvTF56l8RVF1FZHrW1LhMIUN2JbpaLSPQG2TlK/6bETQ5ZwzTnRBENKArxDZ9sSlkvFO7BjdbTwhuAZ5JgtVu8vm2L81c+RVHwXKO2v5e/JOVQehWl1d/fisM7OE/CqsdM6Z5oMOVi48aCaySDJJHg43X/qr0W04q2plGV0QTAZVONInJw6NW5LIa3/1T0XO+ofoVdQG+HC1IMbU5Nrxg2YjOxRtF6tbQKy2AdUMjSWuyMSetYaJc79LpgWgu9mXQ+FK7ctRXtqvtwFKse4zLo84r6X1/H4FABH0aL+JjC/JQ/adf5o8Ks/dK/fkyCbM6m4Yfsh4EgBFnNEFpvTPjhOAUWtUOUhP9Eu3n6FHogZAxqHqHBkV2mRWs7RVAyXp3rgVdtQhBbYEJynfZn9+RgNg6xpQAdr5pN8K/NvPNj2e/n/SlYeBfnNebN8w2oyS2XdRiu/raux7rqfnbb2CMzaPV1sw="
+  app: wepa-ryhma
+  on:
+    repo: Falzed/wepa
