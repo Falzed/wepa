@@ -5,7 +5,7 @@ import javax.persistence.Lob;
 import org.springframework.data.jpa.domain.AbstractPersistable;
  
 @Entity
-public class Picture extends AbstractPersistable<Long> {
+public class Kuva extends AbstractPersistable<Long> {
  
     @Lob
     private byte[] content;
