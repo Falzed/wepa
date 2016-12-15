@@ -27,6 +27,7 @@ public class KuvaController {
  
         if (id >= 1L && id <= imageCount) {
             model.addAttribute("current", id);
+            model.addAttribute("comments", pictureRepository.findOne(id).getKommentit());
         }
  
         if (id < imageCount && id > 0L) {
