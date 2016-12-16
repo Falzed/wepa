@@ -1,14 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wepa.domain;
 
-/**
- *
- * @author oemkulma
- */
-public class Tunniste {
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class Tunniste extends AbstractPersistable<Long>{
+    private String nimi;
+    
+    @ManyToMany
+    List<Kuva> kuvat;
+    
+    public String getNimi() {
+        return nimi;
+    }
+    
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
     
 }

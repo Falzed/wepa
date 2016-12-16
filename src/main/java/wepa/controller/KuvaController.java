@@ -14,6 +14,7 @@ import wepa.domain.Kuva;
 import wepa.repository.KommenttiRepository;
 import wepa.repository.KuvaRepository;
 import wepa.service.KuvaService;
+import wepa.service.TykkaysService;
 
 @Controller
 @RequestMapping("/pics")
@@ -21,6 +22,9 @@ public class KuvaController {
 
     @Autowired
     private KuvaService kuvaService;
+    
+    @Autowired
+    private TykkaysService tykkaysService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewOwnPictures(Model model) {
@@ -32,7 +36,7 @@ public class KuvaController {
     public String viewOne(Model model, @PathVariable Long id) {
         model.addAttribute("kuva", kuvaService.findOne(id));
         model.addAttribute("kommentit", kuvaService.getKuvanKommentit(id));
-        model.addAttribute("tykkaykset", 0);
+        model.addAttribute("tykkaykset", tykkaysService.tykkayksia(id));
         return "pic";
     }
 

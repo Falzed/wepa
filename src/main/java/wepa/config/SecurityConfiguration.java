@@ -24,7 +24,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
         http.csrf().disable();
         http.authorizeRequests()
-//                .regexMatchers(HttpMethod.POST, "/items").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated();
         http.formLogin()
                 .permitAll();

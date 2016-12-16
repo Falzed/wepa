@@ -11,6 +11,7 @@
         <ul>
             <li th:each="kuva : ${kuvat}">
                 <img th:src="@{/pics/{id}/content(id=${kuva.id})}"/>
+                <a th:href ="@{/pics/{id}(id=${kuva.id})}">linkki</a>
             </li>
         </ul>
         

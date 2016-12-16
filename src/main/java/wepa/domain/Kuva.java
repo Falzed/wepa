@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -17,8 +18,14 @@ public class Kuva extends AbstractPersistable<Long> {
     
     @ManyToOne
     private Kayttaja kayttaja;
-    @OneToMany(mappedBy = "kuva", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "kuva")
     private List<Kommentti> kommentit;
+   
+    @OneToMany(mappedBy = "kuva")
+    private List<Tykkays> tykkaykset;
+    
+    @ManyToMany(mappedBy = "kuvat")
+    private List<Tunniste> tunnisteet;
  
     public byte[] getContent() {
         return content;
@@ -45,5 +52,16 @@ public class Kuva extends AbstractPersistable<Long> {
 
     public void setKommentit(List<Kommentti> kommentit) {
         this.kommentit = kommentit;
+    }
+    
+    public List<Tykkays> getTykkaykset() {
+        if (this.tykkaykset == null) {
+            this.tykkaykset = new ArrayList<>();
+        }
+        return tykkaykset;
+    }
+
+    public void setTykkaykset(List<Tykkays> tykkaykset) {
+        this.tykkaykset = tykkaykset;
     }
 }
