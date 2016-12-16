@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DefaultController {
  
 
-    @RequestMapping(value = "/*", method = RequestMethod.GET)
+    @RequestMapping(value = "*", method = RequestMethod.GET)
     public String view() {
-        return "kuvat";
+        return "pics";
     }
  
 }
