@@ -1,14 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package wepa.domain;
 
-/**
- *
- * @author oemkulma
- */
-public class Tykkays {
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+@Entity
+public class Tykkays extends AbstractPersistable<Long> {
+    @ManyToOne
+    @JoinColumn
+    private Kayttaja kayttaja;
+    @ManyToOne
+    @JoinColumn
+    private Kuva kuva;
+
+    public Kayttaja getKayttaja() {
+        return kayttaja;
+    }
+
+    public void setKayttaja(Kayttaja kayttaja) {
+        this.kayttaja = kayttaja;
+    }
+
+    public Kuva getKuva() {
+        return kuva;
+    }
+
+    public void setKuva(Kuva kuva) {
+        this.kuva = kuva;
+    }
+  
     
 }

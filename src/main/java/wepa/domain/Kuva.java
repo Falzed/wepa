@@ -19,6 +19,9 @@ public class Kuva extends AbstractPersistable<Long> {
     private Kayttaja kayttaja;
     @OneToMany(mappedBy = "kuva", fetch = FetchType.EAGER)
     private List<Kommentti> kommentit;
+//    @OneToMany(mappedBy = "kuva", fetch = FetchType.LAZY)
+    
+    private List<Tykkays> tykkaykset;
  
     public byte[] getContent() {
         return content;
@@ -41,6 +44,17 @@ public class Kuva extends AbstractPersistable<Long> {
             this.kommentit = new ArrayList<>();
         }
         return kommentit;
+    }
+
+    public List<Tykkays> getTykkaykset() {
+        if (this.tykkaykset == null) {
+            this.tykkaykset = new ArrayList<>();
+        }
+        return tykkaykset;
+    }
+
+    public void setTykkaykset(List<Tykkays> tykkaykset) {
+        this.tykkaykset = tykkaykset;
     }
 
     public void setKommentit(List<Kommentti> kommentit) {
