@@ -35,6 +35,10 @@ public class Kommentti extends AbstractPersistable<Long> {
     public void setKayttaja(Kayttaja kayttaja) {
         this.kayttaja = kayttaja;
     }
+    
+    public String getKayttajanNimi() {
+        return kayttaja.getUsername();
+    }
 
     public Timestamp getAika() {
         return aika;

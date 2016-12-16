@@ -14,16 +14,16 @@ public class KommenttiController {
     @Autowired
     private KommenttiService kommenttiService;
     
-    @RequestMapping(value = "/pics/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/pics/pic/{id}", method = RequestMethod.POST)
     public String postKommentti(@PathVariable Long id, @RequestParam String sisalto) {
         kommenttiService.postKommentti(id, sisalto);
-        return "redirect:/pics/{id}";
+        return "redirect:/pics/pic/{id}";
     }
     
     @RequestMapping(value = "/pics/{id}/{kommenttiId}", method = RequestMethod.DELETE)
     public String deleteKommentti(@PathVariable Long id, @PathVariable Long kommenttiId) {
         kommenttiService.deleteKommentti(id, kommenttiId);
-        return "redirect:/pics/{id}";
+        return "redirect:/pics/pic/{id}";
     }
     
 }

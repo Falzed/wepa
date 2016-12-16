@@ -1,0 +1,50 @@
+body {
+    margin-top: 40px;
+    font-family: Arial;
+    font-size: 14px;
+    line-height: 2em;
+    background-color: #f8f8f8;
+}
+
+div {
+    width: 700px;
+    padding: 15px;
+    padding-left: 30px;
+    background-color: #fff;
+    border: 1px solid #efefef;
+    text-align: left;
+}
+
+.next {
+    padding: 50px;
+}
+
+h1 {
+    font-family: Trebuchet ms;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+h2 {
+    font-family: Trebuchet ms;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+korostus {
+    font-color: #bc426f;
+    font-weight: bold;
+}
+
+a:link, a:visited {
+    color:#f1831d;
+}
+
+a:hover {
+    color:#ff9900;
+}
+
+a:active {
+    color:#f1831d;
+}
