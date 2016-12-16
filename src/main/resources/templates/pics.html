@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head lang="en">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <meta charset="UTF-8" />
         <title>Wepa</title>
     </head>
@@ -31,13 +32,15 @@
                 </li>
             </ul>
         </div>-->
-
         
-        <h2>Add new content</h2>
+        <h2>lisää uusi kuva</h2>
 
+        <div>
         <form method="POST" action="/pics" enctype="multipart/form-data">
             <input type="file" name="file" id="file"/>
-            <input type="submit" value="Lisää!"/>
+            <input type="submit" value="Lisää"/>
         </form>
+        </div>
+        
     </body>
 </html>

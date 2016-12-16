@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wepa.domain.Kayttaja;
+import wepa.domain.Kommentti;
 import wepa.domain.Kuva;
 import wepa.repository.KuvaRepository;
 
@@ -31,5 +32,9 @@ public class KuvaService {
     public void save(Kuva kuva) {
         kuva.setKayttaja(loggedInKayttajaService.getAuthenticatedKayttaja());
         kuvaRepository.save(kuva);
+    }
+    
+    public List<Kommentti> getKuvanKommentit(Long id) {
+        return kuvaRepository.findOne(id).getKommentit();
     }
 }

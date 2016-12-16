@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <meta charset="UTF-8" />
+        <title>Kuva</title>
+    </head>
+    <body>
+        <center>
+           
+        <h1>Kuva</h1>
+        
+        <br/>
+        
+        <div><center>
+            <img th:src="@{/pics/{id}/content(id=${kuva.id})}"/>
+            </center></div>
+
+            <!--<span th:text="${tunniste.nimi}">tunnisteet</span>-->
+
+        <br/>
+        
+        <div>
+            <a href="">tägi</a>, <a href="">tunniste</a>, <a href="">tag2</a>
+            
+            <br/>
+            
+            <!--<span th:text="${tykkays}">tykkäykset</span>-->
+            
+            <table>
+                <tr>
+                    <td th:if="${tykkaykset != null}" id="next">
+                        <span style="font-size: 20px">&hearts; </span> &nbsp;
+                        <!--<span th:text="${tykkaykset.getMaara()}">tykkäyksiä</a>-->
+                    </td>
+
+                    <td id="next">
+                        <form th:action="@{/pics/pic/{id}/tykkaa(id=${kuva.id})}" method="POST">
+                            <input type="submit" value="Tykkää"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+            
+            
+        </div>
+        
+        
+        <br/>
+        
+        <h2>kommentit</h2>
+        
+        <div>
+            <table width="670px"> 
+                <tr th:each="kommentti: ${kommentit}">
+                    <td width="100px" th:text="${kommentti.kayttajanNimi}">käyttäjä</td>
+                    <td width="420px" th:text="${kommentti.sisalto}">kommentti</td>
+                    <td width="120px" th:text="${kommentti.aika}">aika</td>
+                    <td width="30px">
+                        <form th:action="@{/pics/{id}/{kommenttiId}(id=${kuva.id}, kommenttiId=${kommentti.id})}" th:method="DELETE">
+                            <input type="submit" value="Poista" />
+                        </form>
+                    </td>
+                </tr>
+            </table>  
+            
+            <br/>
+            
+            <h2>Lisää uusi kommentti</h2>
+            
+            
+            <form th:action="@{/pics/{id}/comment (id=${kuva.id})}" method="POST">
+                <textarea name="sisalto" style="height:70px; width:400px;"></textarea>
+                <br/>
+                <input type="submit" value="Lähetä"/>
+            </form>
+                
+        </div>
+        
+        <br/>
+        
+        <a th:href="@{~/pics}">Takaisin listaukseen</a>
+        
+        
+        </center>
+    </body>
+</html>

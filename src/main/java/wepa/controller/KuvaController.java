@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import wepa.domain.Kuva;
+import wepa.repository.KommenttiRepository;
 import wepa.repository.KuvaRepository;
 import wepa.service.KuvaService;
 
@@ -30,7 +31,9 @@ public class KuvaController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String viewOne(Model model, @PathVariable Long id) {
         model.addAttribute("kuva", kuvaService.findOne(id));
-        return "picture";
+        model.addAttribute("kommentit", kuvaService.getKuvanKommentit(id));
+        model.addAttribute("tykkaykset", 0);
+        return "pic";
     }
 
     //gif pitäisi toimia myös muille kuville
@@ -51,4 +54,5 @@ public class KuvaController {
 
         return "redirect:/pics";
     }
+    
 }

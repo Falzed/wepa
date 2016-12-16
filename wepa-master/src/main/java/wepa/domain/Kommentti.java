@@ -31,13 +31,13 @@ public class Kommentti extends AbstractPersistable<Long> {
     public Kayttaja getKayttaja() {
         return kayttaja;
     }
-
-    public void setKayttaja(Kayttaja kayttaja) {
-        this.kayttaja = kayttaja;
-    }
     
     public String getKayttajanNimi() {
         return kayttaja.getUsername();
+    }
+
+    public void setKayttaja(Kayttaja kayttaja) {
+        this.kayttaja = kayttaja;
     }
 
     public Timestamp getAika() {
