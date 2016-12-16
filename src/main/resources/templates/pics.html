@@ -7,24 +7,18 @@
     <body>
 
         <h2>Wepa (<span th:text="${count}">count</span> images)</h2>
-
-        <div th:if="${current != null}">
-            <img th:src="@{/pics/{id}/content(id=${current})}"/>
-        </div>
-
-        <div th:if="${previous != null}">
-            <a th:href="@{/pics/{id}(id=${previous})}">Previous</a>
-        </div>
-
-        <div th:if="${next != null}">
-            <a th:href="@{/pics/{id}(id=${next})}">Next</a>
-        </div>
+        
+        <ul>
+            <li th:each="kuva : ${kuvat}">
+                <img th:src="@{/pics/{id}/content(id=${kuva.id})}"/>
+            </li>
+        </ul>
 
         <h2>Add new content</h2>
 
         <form method="POST" action="/pics" enctype="multipart/form-data">
             <input type="file" name="file" id="file"/>
-            <input type="submit" value="Moarr!"/>
+            <input type="submit" value="Lisää!"/>
         </form>
     </body>
 </html>

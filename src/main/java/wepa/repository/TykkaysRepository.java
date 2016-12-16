@@ -9,6 +9,6 @@ package wepa.repository;
  *
  * @author oemkulma
  */
-public class TykkaysRepository {
+public interface TykkaysRepository {
     
 }

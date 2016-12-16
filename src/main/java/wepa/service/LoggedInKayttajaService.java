@@ -11,7 +11,7 @@ import wepa.repository.KayttajaRepository;
 public class LoggedInKayttajaService {
 
     @Autowired
-    private KayttajaRepository accountRepository;
+    private KayttajaRepository kayttajaRepository;
 
     public Kayttaja getAuthenticatedKayttaja() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -19,6 +19,6 @@ public class LoggedInKayttajaService {
             return null;
         }
 
-        return accountRepository.findByUsername(authentication.getName());
+        return kayttajaRepository.findByUsername(authentication.getName());
     }
 }
