@@ -44,6 +44,7 @@ public class KuvaController {
     }
 
     //gif pitäisi toimia myös muille kuville
+    @Transactional
     @RequestMapping(value = "/{id}/content", method = RequestMethod.GET, produces = "image/gif")
     @ResponseBody
     public byte[] viewData(@PathVariable Long id) {
