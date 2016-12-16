@@ -1,8 +1,12 @@
 package wepa.domain;
  
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
  
 @Entity
@@ -13,6 +17,8 @@ public class Kuva extends AbstractPersistable<Long> {
     
     @ManyToOne
     private Kayttaja kayttaja;
+    @OneToMany(mappedBy = "kuva", fetch = FetchType.EAGER)
+    private List<Kommentti> kommentit;
  
     public byte[] getContent() {
         return content;
@@ -28,5 +34,16 @@ public class Kuva extends AbstractPersistable<Long> {
  
     public void setKayttaja(Kayttaja kayttaja) {
         this.kayttaja = kayttaja;
+    }
+
+    public List<Kommentti> getKommentit() {
+        if (this.kommentit == null) {
+            this.kommentit = new ArrayList<>();
+        }
+        return kommentit;
+    }
+
+    public void setKommentit(List<Kommentti> kommentit) {
+        this.kommentit = kommentit;
     }
 }

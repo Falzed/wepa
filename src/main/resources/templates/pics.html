@@ -5,15 +5,34 @@
         <title>Wepa</title>
     </head>
     <body>
-
-        <h2>Wepa (<span th:text="${count}">count</span> images)</h2>
+        <h2>Kuvapalvelu: (<span th:text="${count}">count</span> images)</h2>
         
         <ul>
             <li th:each="kuva : ${kuvat}">
                 <img th:src="@{/pics/{id}/content(id=${kuva.id})}"/>
             </li>
         </ul>
+        
+<!--        <div th:if="${current != null}">
+            <h2>Comments</h2>
+            <h4>Post one!</h4>
+            <form th:action="@{/pics/{id}(id=${current})}" th:method="POST">
+                <input type="text" name="sisalto"></input>
+                <input type="submit" value="Add!" />
+            </form>
 
+            <ul>
+                <li th:each="kommentti : ${comments}">
+                    <span th:text="${kommentti.sisalto}">comment here</span> -
+                    <span th:text="${kommentti.kayttaja.username}"> username</span>
+                    <form th:action="@{/pics/{id}/{kommenttiId}(id=${current}, kommenttiId=${kommentti.id})}" th:method="DELETE">
+                        <input type="submit" value="Remove" />
+                    </form>
+                </li>
+            </ul>
+        </div>-->
+
+        
         <h2>Add new content</h2>
 
         <form method="POST" action="/pics" enctype="multipart/form-data">
