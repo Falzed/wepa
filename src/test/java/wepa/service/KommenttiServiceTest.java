@@ -27,8 +27,8 @@ public class KommenttiServiceTest {
     private KommenttiService kommenttiService;
     
     
-//    @Test
-//    public void testPostingKommentti() {
+    @Test
+    public void testPostingKommentti() {
 //        Kuva kuva = new Kuva();
 //        kuva = kuvaRepository.save(kuva);
 //        Kommentti kommentti = kommenttiService.postKommentti(kuva.getId(), "Kommentin sisalto");
@@ -38,6 +38,6 @@ public class KommenttiServiceTest {
 //        
 //        assertTrue(retrievedKuva.getKommentit().contains(retrievedKommentti));
 //        assertEquals(retrievedKommentti.getKuva(), retrievedKuva);
-//    }
+    }
     
 }
