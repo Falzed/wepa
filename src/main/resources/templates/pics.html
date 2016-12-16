@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>Wepa</title>
+    </head>
+    <body>
+
+        <h2>Kuvapalvelu: (<span th:text="${count}">count</span> images)</h2>
+
+        <div th:if="${current != null}">
+            <img th:src="@{/pics/{id}/content(id=${current})}"/>
+        </div>
+
+        <div th:if="${previous != null}">
+            <a th:href="@{/pics/{id}(id=${previous})}">Previous</a>
+        </div>
+
+        <div th:if="${next != null}">
+            <a th:href="@{/pics/{id}(id=${next})}">Next</a>
+        </div>
+        
+        <div th:if="${current != null}">
+            <h2>Comments</h2>
+            <h4>Post one!</h4>
+            <form th:action="@{/pics/{id}(id=${current})}" th:method="POST">
+                <input type="text" name="sisalto"></input>
+                <input type="submit" value="Add!" />
+            </form>
+
+            <ul>
+                <li th:each="kommentti : ${comments}">
+                    <span th:text="${kommentti.sisalto}">comment here</span> -
+                    <span th:text="${kommentti.kayttaja.username}"> username</span>
+                    <form th:action="@{/pics/{id}/{kommenttiId}(id=${current}, kommenttiId=${kommentti.id})}" th:method="DELETE">
+                        <input type="submit" value="Remove" />
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+        
+        <h2>Add new content</h2>
+
+        <form method="POST" action="/pics" enctype="multipart/form-data">
+            <input type="file" name="file" id="file"/>
+            <input type="submit" value="Moarr!"/>
+        </form>
+    </body>
+</html>
