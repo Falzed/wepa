@@ -1,6 +1,7 @@
 package wepa.controller;
 
 import java.io.IOException;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +27,14 @@ public class KuvaController {
     @Autowired
     private TykkaysService tykkaysService;
 
+    @Transactional
     @RequestMapping(method = RequestMethod.GET)
     public String viewOwnPictures(Model model) {
         model.addAttribute("kuvat", kuvaService.findByAccount());
         return "pics";
     }
-
+    
+    @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String viewOne(Model model, @PathVariable Long id) {
         model.addAttribute("kuva", kuvaService.findOne(id));
