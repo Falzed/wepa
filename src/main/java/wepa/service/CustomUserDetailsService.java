@@ -34,22 +34,26 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true,
                 Arrays.asList(new SimpleGrantedAuthority(account.getAuthority())));
     }
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void init() {
-        Kayttaja testAdmin = new Kayttaja();
-        testAdmin.setAuthority("ADMIN");
-        testAdmin.setPassword(passwordEncoder.encode("admin"));
-        testAdmin.setUsername("admin");
-        accountRepository.save(testAdmin);
+        if (accountRepository.findByUsername("admin") == null) {
+            Kayttaja testAdmin = new Kayttaja();
+            testAdmin.setAuthority("ADMIN");
+            testAdmin.setPassword(passwordEncoder.encode("admin"));
+            testAdmin.setUsername("admin");
+            accountRepository.save(testAdmin);
+        }
 
-        Kayttaja testUser = new Kayttaja();
-        testUser.setAuthority("USER");
-        testUser.setPassword(passwordEncoder.encode("user"));
-        testUser.setUsername("user");
-        accountRepository.save(testUser);
+        if (accountRepository.findByUsername("user") == null) {
+            Kayttaja testUser = new Kayttaja();
+            testUser.setAuthority("USER");
+            testUser.setPassword(passwordEncoder.encode("user"));
+            testUser.setUsername("user");
+            accountRepository.save(testUser);
+        }
     }
 }
