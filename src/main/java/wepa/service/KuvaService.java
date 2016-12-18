@@ -37,4 +37,8 @@ public class KuvaService {
     public List<Kommentti> getKuvanKommentit(Long id) {
         return kuvaRepository.findOne(id).getKommentit();
     }
+    
+    public void deleteKuva(Long id) {
+        kuvaRepository.delete(id);
+    }
 }

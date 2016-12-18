@@ -63,4 +63,9 @@ public class KuvaController {
         return "redirect:/pics";
     }
     
+    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+    public void deletePicture(@PathVariable Long id) {
+        kuvaService.deleteKuva(id);
+    }
+    
 }

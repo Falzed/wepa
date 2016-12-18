@@ -26,4 +26,8 @@ public class TunnisteService {
     public Tunniste findByNimi(String nimi) {
         return tunnisteRepository.findByNimi(nimi);
     }
+    
+    public void delete(Long id) {
+        tunnisteRepository.delete(id);
+    }
 }
