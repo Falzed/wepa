@@ -18,9 +18,16 @@ public class TykkaysService {
     private KuvaRepository kuvaRepository;
     
     public Tykkays tallennaTykkays(Kuva kuva) {
+        Kayttaja kayttaja = loggedInKayttajaService.getAuthenticatedKayttaja();
+        for(Tykkays tykkays : kuva.getTykkaykset()) {
+            if(tykkays.getKayttaja() == kayttaja) {
+                return null;
+            }
+        }
+            
         Tykkays tykkays = new Tykkays();
         tykkays = tykkaysRepository.save(tykkays);
-        Kayttaja kayttaja = loggedInKayttajaService.getAuthenticatedKayttaja();
+        
         tykkays.setKayttaja(kayttaja);
         tykkays.setKuva(kuva);
         

@@ -36,6 +36,9 @@ public class KuvaService {
     }
     
     public List<Kommentti> getKuvanKommentit(Long id) {
+        if(kuvaRepository.findOne(id) == null) {
+            return null;
+        }
         return kuvaRepository.findOne(id).getKommentit();
     }
     
