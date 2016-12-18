@@ -5,9 +5,13 @@
  */
 package wepa.controller;
 
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,14 +29,19 @@ public class TunnisteController {
     @RequestMapping(method = RequestMethod.GET)
     public String getTunnisteet(Model model) {
         model.addAttribute("tunnisteet", tunnisteService.findAll());
+        model.addAttribute("tunniste", new Tunniste());
         return "tunnisteet";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String lisaaTunniste(@RequestParam String nimi) {
-        if (tunnisteService.findByNimi(nimi) == null) {
-            Tunniste tunniste = new Tunniste();
-            tunniste.setNimi(nimi);
+    public String lisaaTunniste(@Valid @ModelAttribute Tunniste tunniste,
+            BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()){
+            model.addAttribute("tunniste", tunniste);
+            model.addAttribute("tunnisteet", tunnisteService.findAll());
+            return "tunnisteet";
+        }
+        if (tunnisteService.findByNimi(tunniste.getNimi()) == null) {
             tunnisteService.addTag(tunniste);
         }
         return "redirect:/tunnisteet";

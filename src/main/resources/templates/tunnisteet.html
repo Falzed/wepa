@@ -7,22 +7,23 @@
     </head>
     <body>
         <h2>Kuvapalvelu - tunnisteet</h2>
-        
+
         <ul>
             <li th:each="tunniste : ${tunnisteet}">
                 <span th:text="${tunniste.nimi}"/>
                 <a th:href ="@{/pics/{id}(id=${tunniste.id})}" />
             </li>
         </ul>
-        
+
         <h2>lisää uusi tunniste</h2>
 
         <div>
-        <form method="POST" action="/tunnisteet">
-            <input type="text" name="nimi"/>
-            <input type="submit" value="Lisää"/>
-        </form>
+            <form method="POST" th:action="@{/tunnisteet}" th:object="${tunniste}">
+                <input type="text" name="nimi"/>
+                <p th:if="${#fields.hasErrors('nimi')}" th:errors='*{nimi}'></p>
+                <input type="submit" value="Lisää"/>
+            </form>
         </div>
-        
+
     </body>
 </html>
