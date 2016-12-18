@@ -69,8 +69,9 @@
             <h2>Lisää uusi kommentti</h2>
             
             
-            <form th:action="@{/pics/{id}/comment (id=${kuva.id})}" method="POST">
+            <form th:action="@{/pics/{id}/comment (id=${kuva.id})}" method="POST" th:object="${kommentti}">
                 <textarea name="sisalto" style="height:70px; width:400px;"></textarea>
+                <p th:if="${#fields.hasErrors('sisalto')}" th:errors='*{sisalto}'></p>
                 <br/>
                 <input type="submit" value="Lähetä"/>
             </form>

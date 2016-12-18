@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.TemporalType;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.data.jpa.repository.Temporal;
 
@@ -17,6 +19,8 @@ public class Kommentti extends AbstractPersistable<Long> {
     private Kuva kuva;
     private Kayttaja kayttaja;
     private Timestamp aika; 
+    @NotBlank(message = "Kommentti ei voi olla tyhjä")
+    @Length(min = 1, max = 300, message = "Kommentin pituus 1-300 merkkiä")
     private String sisalto;
 
     

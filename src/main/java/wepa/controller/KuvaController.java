@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import wepa.domain.Kommentti;
 import wepa.domain.Kuva;
 import wepa.repository.KommenttiRepository;
 import wepa.repository.KuvaRepository;
@@ -40,6 +41,7 @@ public class KuvaController {
         model.addAttribute("kuva", kuvaService.findOne(id));
         model.addAttribute("kommentit", kuvaService.getKuvanKommentit(id));
         model.addAttribute("tykkaykset", tykkaysService.tykkayksia(id));
+        model.addAttribute("kommentti", new Kommentti());
         return "pic";
     }
 
