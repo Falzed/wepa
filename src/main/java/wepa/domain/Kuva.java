@@ -64,4 +64,11 @@ public class Kuva extends AbstractPersistable<Long> {
     public void setTykkaykset(List<Tykkays> tykkaykset) {
         this.tykkaykset = tykkaykset;
     }
+    
+    public List<Tunniste> getTunnisteet() {
+        if (this.tunnisteet == null) {
+            this.tunnisteet = new ArrayList<>();
+        }
+        return tunnisteet;
+    }
 }

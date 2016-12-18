@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import wepa.domain.Kayttaja;
 import wepa.domain.Kommentti;
 import wepa.domain.Kuva;
+import wepa.domain.Tunniste;
 import wepa.repository.KuvaRepository;
 
 @Service
@@ -36,6 +37,10 @@ public class KuvaService {
     
     public List<Kommentti> getKuvanKommentit(Long id) {
         return kuvaRepository.findOne(id).getKommentit();
+    }
+    
+    public List<Tunniste> getKuvanTunnisteet(Long id) {
+        return kuvaRepository.findOne(id).getTunnisteet();
     }
     
     public void deleteKuva(Long id) {
