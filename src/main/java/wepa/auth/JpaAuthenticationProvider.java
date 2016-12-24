@@ -18,14 +18,14 @@ import wepa.repository.KayttajaRepository;
 public class JpaAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private KayttajaRepository personRepository;
+    private KayttajaRepository kayttajaRepository;
 
     @Override
     public Authentication authenticate(Authentication a) throws AuthenticationException {
         String username = a.getPrincipal().toString();
         String password = a.getCredentials().toString();
 
-        Kayttaja kayttaja = personRepository.findByUsername(username);
+        Kayttaja kayttaja = kayttajaRepository.findByUsername(username);
 
         if (kayttaja == null) {
             throw new AuthenticationException("Unable to authenticate user " + username) {
