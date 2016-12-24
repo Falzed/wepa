@@ -1,14 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wepa.controller;
 
-/**
- *
- * @author oemkulma
- */
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import wepa.domain.Kayttaja;
+import wepa.repository.KayttajaRepository;
+
+@Controller
+@RequestMapping("/kayttajat")
 public class KayttajaController {
     
+    @Autowired
+    private KayttajaRepository kayttajaRepository;
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public String create(@ModelAttribute Kayttaja kayttaja) {
+        kayttajaRepository.save(kayttaja);
+        return "redirect:/login";
+    }
 }

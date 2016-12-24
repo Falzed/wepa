@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>register</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <div class="sign-in-box">
+            <form method="POST" th:action="@{/kayttajat}" th:object="${kayttaja}">
+                <div class="text-boxs">
+                    <span class="text-box">
+                        <label class="s-user"></label>
+                        <input type="text" name="username" placeholder="Username" />
+                        <div class="clearfix"></div>
+                    </span>
+                    <span class="text-box">
+                        <label class="s-lock"></label>
+                        <input type="text" name="password" placeholder="Password" />
+                        <div class="clearfix"></div>
+                    </span>
+                </div>
+                <input type="submit" value="register" />
+            </form>
+        </div>
+    </body>
+</html>

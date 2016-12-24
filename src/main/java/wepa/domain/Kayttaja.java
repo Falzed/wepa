@@ -3,6 +3,7 @@ package wepa.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Entity
 public class Kayttaja extends AbstractPersistable<Long> {
@@ -10,6 +11,7 @@ public class Kayttaja extends AbstractPersistable<Long> {
     @Column(unique = true)
     private String username;
     private String password;
+    private String salt;
     
     private String authority;
 
@@ -26,7 +28,16 @@ public class Kayttaja extends AbstractPersistable<Long> {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        salt = BCrypt.gensalt();
+        this.password = BCrypt.hashpw(password, salt);
+    }
+    
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getAuthority() {

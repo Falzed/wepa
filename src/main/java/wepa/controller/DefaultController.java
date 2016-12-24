@@ -9,4 +9,14 @@ public class DefaultController {
     public String redirect() {
         return "redirect:/pics";
     }
+    
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+    
+    @RequestMapping("/register")
+    public String register() {
+        return "register";
+    }
 }
