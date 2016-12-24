@@ -38,6 +38,19 @@ public class TykkaysService {
         return tykkays;
     }
     
+    public Tykkays poistaTykkays(Kuva kuva) {
+        Kayttaja kayttaja = loggedInKayttajaService.getAuthenticatedKayttaja();
+        for(Tykkays tykkays : kuva.getTykkaykset()) {
+            if(tykkays.getKayttaja() == kayttaja) {
+                kuva.getTykkaykset().remove(tykkays);
+                kuvaRepository.save(kuva);
+                return tykkays;
+            }
+        }
+        
+        return null;
+    }
+    
     public int tykkayksia(Long id) {
         return kuvaRepository.findOne(id).getTykkaykset().size();
     }

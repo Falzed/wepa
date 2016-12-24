@@ -3,6 +3,7 @@ package wepa.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import wepa.domain.Kuva;
 import wepa.domain.Tunniste;
 import wepa.repository.KuvaRepository;
 import wepa.repository.TunnisteRepository;
@@ -29,5 +30,24 @@ public class TunnisteService {
     
     public void delete(Long id) {
         tunnisteRepository.delete(id);
+    }
+    
+    public void lisaatunnisteKuvaan(Long tunnisteId, Long kuvaId) {
+        if(tunnisteRepository.findOne(tunnisteId) == null ||
+                kuvaRepository.findOne(kuvaId) == null) {
+            return;
+        }
+        Kuva kuva = kuvaRepository.findOne(kuvaId);
+        kuva.getTunnisteet().add(tunnisteRepository.findOne(tunnisteId));
+        kuvaRepository.save(kuva);
+    }
+    
+    public void poistaTunnisteKuvasta(Long tunnisteId, Long kuvaId) {
+        Kuva kuva = kuvaRepository.findOne(kuvaId);
+        if(!kuva.getTunnisteet().contains(tunnisteRepository.findOne(tunnisteId))) {
+            return;
+        }
+        kuva.getTunnisteet().remove(tunnisteRepository.findOne(tunnisteId));
+        kuvaRepository.save(kuva);
     }
 }

@@ -47,6 +47,18 @@ public class TunnisteController {
         return "redirect:/tunnisteet";
     }
     
+    @RequestMapping(value="/{tunnisteId}/{kuvaId}", method = RequestMethod.POST)
+    public String lisaaTunnisteKuvaan(@PathVariable Long tunnisteId, @PathVariable Long kuvaId) {
+        tunnisteService.lisaatunnisteKuvaan(tunnisteId, kuvaId);
+        return "redirect:/pics/"+kuvaId;
+    }
+    
+    @RequestMapping(value="/{tunnisteId}/{kuvaId}", method = RequestMethod.DELETE)
+    public String poistaTunnisteKuvasta(@PathVariable Long tunnisteId, @PathVariable Long kuvaId) {
+        tunnisteService.poistaTunnisteKuvasta(tunnisteId, kuvaId);
+        return "redirect:/pics/"+kuvaId;
+    }
+    
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
     public void deleteTunniste(@PathVariable Long id) {
         tunnisteService.delete(id);

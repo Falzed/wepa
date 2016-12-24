@@ -31,4 +31,11 @@ public class TykkaysController {
         tykkaysService.tallennaTykkays(kuva);
         return "redirect:/pics/{id}";
     }
+    
+    @RequestMapping(value = "pics/{id}/tykkaa", method = RequestMethod.DELETE)
+    public String poistaTykkays(@PathVariable Long id) {
+        Kuva kuva = kuvaService.findOne(id);
+        tykkaysService.poistaTykkays(kuva);
+        return "redirect:/pics/{id}";
+    }
 }
