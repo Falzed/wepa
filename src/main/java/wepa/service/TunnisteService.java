@@ -20,10 +20,12 @@ public class TunnisteService {
         return tunnisteRepository.findAll();
     }
     
+    //Talletetaan tunniste repositorioon
     public void addTag(Tunniste tag) {
         tunnisteRepository.save(tag);
     }
     
+    //Tunnisteen haku nimen perusteella
     public Tunniste findByNimi(String nimi) {
         return tunnisteRepository.findByNimi(nimi);
     }
@@ -32,6 +34,7 @@ public class TunnisteService {
         tunnisteRepository.delete(id);
     }
     
+    //Tunnisteen lisääminen tietylle kuvalle
     public void lisaatunnisteKuvaan(Long tunnisteId, Long kuvaId) {
         if(tunnisteRepository.findOne(tunnisteId) == null ||
                 kuvaRepository.findOne(kuvaId) == null) {
@@ -42,6 +45,7 @@ public class TunnisteService {
         kuvaRepository.save(kuva);
     }
     
+    //Tunnisteen poistaminen tietyltä kuvalta
     public void poistaTunnisteKuvasta(Long tunnisteId, Long kuvaId) {
         Kuva kuva = kuvaRepository.findOne(kuvaId);
         if(!kuva.getTunnisteet().contains(tunnisteRepository.findOne(tunnisteId))) {

@@ -39,6 +39,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
 
+
+    //Luodaan testikäyttäjät erilaisilla oikeuksilla
     @PostConstruct
     public void init() {
         if (accountRepository.findByUsername("admin") == null) {

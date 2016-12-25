@@ -13,6 +13,7 @@ public class LoggedInKayttajaService {
     @Autowired
     private KayttajaRepository kayttajaRepository;
 
+    //Haetaan ja palautetaan käyttäjä, kunhan oikeudet kunnossa.
     public Kayttaja getAuthenticatedKayttaja() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {

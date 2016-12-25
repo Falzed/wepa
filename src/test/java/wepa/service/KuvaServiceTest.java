@@ -29,7 +29,7 @@ public class KuvaServiceTest {
     public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
     }
-
+    
     @Test
     public void voiLisataJaLoytyy() throws Exception{
         MockMultipartFile multipartFile = new MockMultipartFile("file", "faketest.gif", "image/gif", "faketestgif".getBytes());

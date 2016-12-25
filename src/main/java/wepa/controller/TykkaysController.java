@@ -25,6 +25,8 @@ public class TykkaysController {
     @Autowired
     private TykkaysService tykkaysService;
     
+
+    //Kuvasta tykkääminen
     @RequestMapping(value = "pics/{id}/tykkaa", method = RequestMethod.POST)
     public String tykkaa(@PathVariable Long id) {
         Kuva kuva = kuvaService.findOne(id);
@@ -32,6 +34,8 @@ public class TykkaysController {
         return "redirect:/pics/{id}";
     }
     
+
+    //Tykkäyksen poistaminen kuvasta
     @RequestMapping(value = "pics/{id}/tykkaa", method = RequestMethod.DELETE)
     public String poistaTykkays(@PathVariable Long id) {
         Kuva kuva = kuvaService.findOne(id);

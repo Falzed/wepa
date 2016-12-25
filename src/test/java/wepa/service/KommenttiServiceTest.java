@@ -1,5 +1,6 @@
 package wepa.service;
 
+import javax.transaction.Transactional;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -27,17 +28,29 @@ public class KommenttiServiceTest {
     private KommenttiService kommenttiService;
     
     
+    //Luodaan aluksi uusi kuva (ilman sisältöä), liitetään siihen kommentti, haetaan kuvan kommentit
+    //ja tarkastetaan sisältyykö testikommentti näihin.
+    //Lopuksi poistetaan kyseinen kommentti ja tarkastetaan ettei se enää ole kyseisellä listalla
     @Test
-    public void testPostingKommentti() {
-//        Kuva kuva = new Kuva();
-//        kuva = kuvaRepository.save(kuva);
-//        Kommentti kommentti = kommenttiService.postKommentti(kuva.getId(), "Kommentin sisalto");
-//        
-//        Kuva retrievedKuva = kuvaRepository.findOne(kuva.getId());
-//        Kommentti retrievedKommentti = kommenttiRepository.findOne(kommentti.getId());
-//        
-//        assertTrue(retrievedKuva.getKommentit().contains(retrievedKommentti));
-//        assertEquals(retrievedKommentti.getKuva(), retrievedKuva);
+    @Transactional
+    public void testPostingAndDeletingKommentti() {
+        Kuva kuva = new Kuva();
+        kuva = kuvaRepository.save(kuva);
+        Kommentti kommentti = kommenttiService.postKommentti(kuva.getId(), "Kommentin sisalto");
+        
+        Kuva retrievedKuva = kuvaRepository.findOne(kuva.getId());
+        Kommentti retrievedKommentti = kommenttiRepository.findOne(kommentti.getId());
+        
+        assertTrue(retrievedKuva.getKommentit().contains(retrievedKommentti));
+        assertEquals(retrievedKommentti.getKuva(), retrievedKuva);
+
+
+        kommenttiService.deleteKommentti(kuva.getId(), kommentti.getId());
+
+        assertFalse(retrievedKuva.getKommentit().contains(retrievedKommentti));
     }
+
+    
+    
     
 }

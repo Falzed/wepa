@@ -21,6 +21,7 @@ public class KommenttiService {
     @Autowired
     private KuvaRepository kuvaRepository;
     
+    //Talletetaan kuvakohtainen kommentti
     public Kommentti postKommentti(Long kuvaId, String sisalto) {
         Kuva kuva = kuvaRepository.findOne(kuvaId);
         Kommentti kommentti = new Kommentti();
@@ -41,6 +42,8 @@ public class KommenttiService {
         return kommentti;
     }
     
+
+    //Poistetaan kuvakohtainen kommentti
     @Transactional
     public void deleteKommentti(Long kuvaId, Long kommenttiId) {
         Kommentti kommentti = kommenttiRepository.findOne(kommenttiId);

@@ -28,6 +28,7 @@ public class KuvaController {
     @Autowired
     private TykkaysService tykkaysService;
 
+    //Haetaan kaikki kuvat
     @Transactional
     @RequestMapping(method = RequestMethod.GET)
     public String viewOwnPictures(Model model) {
@@ -35,6 +36,7 @@ public class KuvaController {
         return "pics";
     }
     
+    //Haetaan yksi tietty kuva
     @Transactional
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String viewOne(Model model, @PathVariable Long id) {
@@ -53,6 +55,8 @@ public class KuvaController {
         return kuvaService.findOne(id).getContent();
     }
 
+
+    //Otetaan kuva vastaan ja talletetaan se
     @RequestMapping(method = RequestMethod.POST)
     public String post(@RequestParam MultipartFile file) throws IOException {
         if (!file.getContentType().startsWith("image/")) {
@@ -65,6 +69,7 @@ public class KuvaController {
         return "redirect:/pics";
     }
     
+    //Kuvan poistaminen
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
     public void deletePicture(@PathVariable Long id) {
         kuvaService.deleteKuva(id);

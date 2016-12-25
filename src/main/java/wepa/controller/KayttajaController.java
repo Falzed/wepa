@@ -15,6 +15,7 @@ public class KayttajaController {
     @Autowired
     private KayttajaRepository kayttajaRepository;
     
+    //Käyttäjätunnuksen luominen
     @RequestMapping(method = RequestMethod.POST)
     public String create(@ModelAttribute Kayttaja kayttaja) {
         kayttajaRepository.save(kayttaja);

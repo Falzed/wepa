@@ -27,6 +27,7 @@ public class KommenttiController {
     @Autowired
     private TykkaysService tykkaysService;
 
+    //Kommentin luonti, tallennus ja kuvaan liittäminen
     @RequestMapping(value = "/pics/{id}/comment", method = RequestMethod.POST)
     public String postKommentti(@PathVariable Long id, @Valid @ModelAttribute Kommentti kommentti,
             BindingResult bindingResult, Model model) {
@@ -41,6 +42,8 @@ public class KommenttiController {
         return "redirect:/pics/{id}";
     }
 
+
+    //Kommentin poistaminen
     @RequestMapping(value = "/pics/{id}/{kommenttiId}", method = RequestMethod.DELETE)
     public String deleteKommentti(@PathVariable Long id, @PathVariable Long kommenttiId) {
         kommenttiService.deleteKommentti(id, kommenttiId);

@@ -26,6 +26,8 @@ public class TunnisteController {
     @Autowired
     TunnisteService tunnisteService;
 
+
+    //Haetaan tunnisteet
     @RequestMapping(method = RequestMethod.GET)
     public String getTunnisteet(Model model) {
         model.addAttribute("tunnisteet", tunnisteService.findAll());
@@ -33,6 +35,8 @@ public class TunnisteController {
         return "tunnisteet";
     }
 
+
+    //Luodaan uusi tunniste
     @RequestMapping(method = RequestMethod.POST)
     public String lisaaTunniste(@Valid @ModelAttribute Tunniste tunniste,
             BindingResult bindingResult, Model model) {
@@ -47,18 +51,23 @@ public class TunnisteController {
         return "redirect:/tunnisteet";
     }
     
+    //Liitetään tunniste kuvaan
     @RequestMapping(value="/{tunnisteId}/{kuvaId}", method = RequestMethod.POST)
     public String lisaaTunnisteKuvaan(@PathVariable Long tunnisteId, @PathVariable Long kuvaId) {
         tunnisteService.lisaatunnisteKuvaan(tunnisteId, kuvaId);
         return "redirect:/pics/"+kuvaId;
     }
     
+
+    //Poistetaan tunniste kuvasta
     @RequestMapping(value="/{tunnisteId}/{kuvaId}", method = RequestMethod.DELETE)
     public String poistaTunnisteKuvasta(@PathVariable Long tunnisteId, @PathVariable Long kuvaId) {
         tunnisteService.poistaTunnisteKuvasta(tunnisteId, kuvaId);
         return "redirect:/pics/"+kuvaId;
     }
     
+
+    //Poistetaan tunniste kokonaan
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
     public void deleteTunniste(@PathVariable Long id) {
         tunnisteService.delete(id);

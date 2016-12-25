@@ -50,7 +50,7 @@ public class TykkaysService {
         
         return null;
     }
-    
+    //Palauttaa tietyn kuvan tykkäysten määrän
     public int tykkayksia(Long id) {
         return kuvaRepository.findOne(id).getTykkaykset().size();
     }
