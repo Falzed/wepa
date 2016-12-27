@@ -10,6 +10,7 @@ div {
     width: 700px;
     padding: 15px;
     padding-left: 30px;
+    padding-right: 30px;
     background-color: #fff;
     border: 1px solid #efefef;
     text-align: left;
@@ -47,4 +48,8 @@ a:hover {
 
 a:active {
     color:#f1831d;
+}
+
+ul {
+  list-style-type: none;
 }

@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>register</title>
+    <head lang="en">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <meta charset="UTF-8" />
+        <title>Kuvapalvelu</title>
     </head>
-    <body>
+    <body><center>
         <div class="sign-in-box">
+            <center>
+            <h2>Create an account</h2>
             <form method="POST" th:action="@{/kayttajat}" th:object="${kayttaja}">
-                <div class="text-boxs">
+                
                     <span class="text-box">
                         <label class="s-user"></label>
                         <input type="text" name="username" placeholder="Username" />
-                        <div class="clearfix"></div>
+                        <br/>
                     </span>
                     <span class="text-box">
                         <label class="s-lock"></label>
                         <input type="password" name="password" placeholder="Password" />
-                        <div class="clearfix"></div>
+                        <br/>
                     </span>
-                </div>
-                <input type="submit" value="register" />
+                <br/>
+                <input type="submit" value="Create account" />
             </form>
-        </div>
+            
+                
+            </center></div>
+        </center>
     </body>
 </html>

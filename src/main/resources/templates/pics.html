@@ -3,15 +3,17 @@
     <head lang="en">
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <meta charset="UTF-8" />
-        <title>Wepa</title>
+        <title>Kuvapalvelu</title>
     </head>
     <body>
-        <h2>Kuvapalvelu: (<span th:text="${count}">count</span> images)</h2>
+        <center>
+        <h1>Kuvapalvelu: (<span th:text="${count}">count</span> kuvaa)</h1>
         
+        <div>
+            <center>
         <ul>
             <li th:each="kuva : ${kuvat}">
-                <img th:src="@{/pics/{id}/content(id=${kuva.id})}"/>
-                <a th:href ="@{/pics/{id}(id=${kuva.id})}">linkki</a>
+                <a th:href="@{/pics/{id}(id=${kuva.id})}"><img th:src="@{/pics/{id}/content(id=${kuva.id})}" alt=""/></a>
             </li>
         </ul>
         
@@ -36,12 +38,13 @@
         
         <h2>lisää uusi kuva</h2>
 
-        <div>
         <form method="POST" action="/pics" enctype="multipart/form-data">
             <input type="file" name="file" id="file"/>
             <input type="submit" value="Lisää"/>
         </form>
+            
+            </center>
         </div>
-        
+        </center>
     </body>
 </html>

@@ -33,6 +33,7 @@ public class KuvaController {
     @RequestMapping(method = RequestMethod.GET)
     public String viewOwnPictures(Model model) {
         model.addAttribute("kuvat", kuvaService.findByAccount());
+        model.addAttribute("count", kuvaService.findAll().size());
         return "pics";
     }
     

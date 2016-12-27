@@ -3,35 +3,31 @@
     <head lang="en">
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <meta charset="UTF-8" />
-        <title>Kuva</title>
+        <title>Kuvapalvelu</title>
     </head>
     <body>
         <center>
            
-        <h1>Kuva</h1>
-        
-        <br/>
-        
         <div><center>
             <img th:src="@{/pics/{id}/content(id=${kuva.id})}"/>
-            </center></div>
 
-            <!--<span th:text="${tunniste.nimi}">tunnisteet</span>-->
-
+            <ul>
+                <li th:each="tunniste : ${tunnisteet}">
+                    <span th:text="tunniste.nimi"/>
+                </li>
+            </ul>
         <br/>
-        
-        <div>
+
             <a href="">tägi</a>, <a href="">tunniste</a>, <a href="">tag2</a>
             
             <br/>
             
-            <!--<span th:text="${tykkays}">tykkäykset</span>-->
             
             <table>
                 <tr>
                     <td th:if="${tykkaykset != null}" id="next">
-                        <span style="font-size: 20px">&hearts; </span> &nbsp;
-                        <span th:text="${tykkaykset}">tykkäyksiä</span>
+                        <!--<span style="font-size: 20px">&hearts; </span> &nbsp;-->
+                        <span th:text="${tykkaykset}">tykkäyksiä</span> tykkäys(tä) &nbsp; 
                     </td>
 
                     <td id="next">
@@ -42,15 +38,11 @@
                 </tr>
             </table>
             
-            
-        </div>
-        
         
         <br/>
         
         <h2>kommentit</h2>
         
-        <div>
             <table width="670px"> 
                 <tr th:each="kommentti: ${kommentit}">
                     <td width="100px" th:text="${kommentti.kayttajanNimi}">käyttäjä</td>
@@ -63,7 +55,7 @@
                     </td>
                 </tr>
             </table>  
-            
+            </center>
             <br/>
             
             <h2>Lisää uusi kommentti</h2>
@@ -75,8 +67,7 @@
                 <br/>
                 <input type="submit" value="Lähetä"/>
             </form>
-                
-        </div>
+            </div>
         
         <br/>
         

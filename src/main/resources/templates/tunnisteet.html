@@ -5,9 +5,10 @@
         <meta charset="UTF-8" />
         <title>Wepa</title>
     </head>
-    <body>
-        <h2>Kuvapalvelu - tunnisteet</h2>
+    <body><center>
+        <h1>Kuvapalvelu - tunnisteet</h1>
 
+        <div>
         <ul>
             <li th:each="tunniste : ${tunnisteet}">
                 <span th:text="${tunniste.nimi}"/>
@@ -15,15 +16,15 @@
             </li>
         </ul>
 
-        <h2>lisää uusi tunniste</h2>
+        <h2>Lisää uusi tunniste</h2>
 
-        <div>
             <form method="POST" th:action="@{/tunnisteet}" th:object="${tunniste}">
                 <input type="text" name="nimi"/>
                 <p th:if="${#fields.hasErrors('nimi')}" th:errors='*{nimi}'></p>
                 <input type="submit" value="Lisää"/>
             </form>
-        </div>
 
+        </div>
+        </center>
     </body>
 </html>
