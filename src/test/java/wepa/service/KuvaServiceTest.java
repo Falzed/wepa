@@ -39,7 +39,7 @@ public class KuvaServiceTest {
         mockMvc.perform(MockMvcRequestBuilders.fileUpload("/pics").file(multipartFilePng)).andExpect(MockMvcResultMatchers.redirectedUrl("/pics"));
         
         int idOfLast = service.findAll().size();
-        
+        assertNotNull(service.findOne((long) idOfLast));
         MvcResult tulos = mockMvc.perform(MockMvcRequestBuilders.get("/pics/+"+idOfLast+"/content")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 
 
