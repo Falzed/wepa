@@ -38,13 +38,13 @@ public class KuvaServiceTest {
 //        mockMvc.perform(MockMvcRequestBuilders.fileUpload("/pics").file(multipartFile)).andExpect(MockMvcResultMatchers.redirectedUrl("/pics"));
         mockMvc.perform(MockMvcRequestBuilders.fileUpload("/pics").file(multipartFilePng)).andExpect(MockMvcResultMatchers.redirectedUrl("/pics"));
         
-        int idOfLast = service.findAll().size();
-        assertFalse(idOfLast==0);
-        assertTrue(idOfLast==1);
+//        int idOfLast = service.findAll().size();
+//        assertFalse(idOfLast==0);
+//        assertTrue(idOfLast==1);
         assertNotNull(service.findAll().get(0));
-        assertTrue(idOfLast==service.findAll().get(0).getId());
-        assertNotNull(service.findOne((long) idOfLast));
-        MvcResult tulos = mockMvc.perform(MockMvcRequestBuilders.get("/pics/+"+idOfLast+"/content")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+//        assertTrue(idOfLast==service.findAll().get(0).getId());
+        assertNotNull(service.findOne(service.findAll().get(0).getId()));
+        MvcResult tulos = mockMvc.perform(MockMvcRequestBuilders.get("/pics/+"+service.findAll().get(0).getId()+"/content")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 
 
 //        Eli tää palautti faketestGif:in ton png sijaan?
