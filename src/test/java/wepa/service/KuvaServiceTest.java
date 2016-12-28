@@ -41,6 +41,7 @@ public class KuvaServiceTest {
         int idOfLast = service.findAll().size();
         assertFalse(idOfLast==0);
         assertTrue(idOfLast==1);
+        assertNotNull(service.findAll().get(0));
         assertTrue(idOfLast==service.findAll().get(0).getId());
         assertNotNull(service.findOne((long) idOfLast));
         MvcResult tulos = mockMvc.perform(MockMvcRequestBuilders.get("/pics/+"+idOfLast+"/content")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
