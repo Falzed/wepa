@@ -29,23 +29,22 @@ public class KuvaServiceTest {
     public void setUp() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webAppContext).build();
     }
-    
+
     @Test
-    public void voiLisataJaLoytyy() throws Exception{
+    public void voiLisataJaLoytyy() throws Exception {
+
+        int sizeBefore = service.findAll().size();
 //        MockMultipartFile multipartFile = new MockMultipartFile("file", "faketest.gif", "image/gif", "faketestgif".getBytes());
         MockMultipartFile multipartFilePng = new MockMultipartFile("file", "faketest.png", "image/png", "faketestpng".getBytes());
-        
+
 //        mockMvc.perform(MockMvcRequestBuilders.fileUpload("/pics").file(multipartFile)).andExpect(MockMvcResultMatchers.redirectedUrl("/pics"));
         mockMvc.perform(MockMvcRequestBuilders.fileUpload("/pics").file(multipartFilePng)).andExpect(MockMvcResultMatchers.redirectedUrl("/pics"));
-        
-//        int idOfLast = service.findAll().size();
-//        assertFalse(idOfLast==0);
-//        assertTrue(idOfLast==1);
-        assertNotNull(service.findAll().get(0));
-//        assertTrue(idOfLast==service.findAll().get(0).getId());
-        assertNotNull(service.findOne(service.findAll().get(0).getId()));
-        MvcResult tulos = mockMvc.perform(MockMvcRequestBuilders.get("/pics/+"+service.findAll().get(0).getId()+"/content")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 
+        int sizeAfter = service.findAll().size();
+        assertTrue(sizeAfter == sizeBefore + 1);
+        assertNotNull(service.findAll().get(sizeAfter));
+        assertNotNull(service.findOne(service.findAll().get(sizeAfter).getId()));
+        MvcResult tulos = mockMvc.perform(MockMvcRequestBuilders.get("/pics/+" + service.findAll().get(sizeAfter).getId() + "/content")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 
 //        Eli tää palautti faketestGif:in ton png sijaan?
         assertEquals("faketestpng", new String(tulos.getResponse().getContentAsByteArray()));
