@@ -42,9 +42,9 @@ public class KuvaServiceTest {
 
         int sizeAfter = service.findAll().size();
         assertTrue(sizeAfter == sizeBefore + 1);
-        assertNotNull(service.findAll().get(sizeAfter));
-        assertNotNull(service.findOne(service.findAll().get(sizeAfter).getId()));
-        MvcResult tulos = mockMvc.perform(MockMvcRequestBuilders.get("/pics/+" + service.findAll().get(sizeAfter).getId() + "/content")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+        assertNotNull(service.findAll().get(sizeAfter - 1));
+        assertNotNull(service.findOne(service.findAll().get(sizeAfter - 1).getId()));
+        MvcResult tulos = mockMvc.perform(MockMvcRequestBuilders.get("/pics/+" + service.findAll().get(sizeAfter - 1).getId() + "/content")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 
 //        Eli tää palautti faketestGif:in ton png sijaan?
         assertEquals("faketestpng", new String(tulos.getResponse().getContentAsByteArray()));
