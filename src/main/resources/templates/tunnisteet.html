@@ -23,7 +23,7 @@
         <h2>Lisää uusi tunniste</h2>
 
             <form method="POST" th:action="@{/tunnisteet}" th:object="${tunniste}">
-                <input type="text" name="nimi"/>
+                <input type="text" name="nimi" id="nimi"/>
                 <p th:if="${#fields.hasErrors('nimi')}" th:errors='*{nimi}'></p>
                 <input type="submit" value="Lisää"/>
             </form>

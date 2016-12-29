@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <meta charset="UTF-8" />
+        <title>Kuvapalvelu</title>
+    </head>
+    <body>
+        <center>
+            <h1>Kuvapalvelun käyttäjät </h1>
+
+            <div>
+                <center>
+
+                    <table> 
+                        <tr th:each="kayttaja: ${kayttajat}">
+                            <td width="100px" th:text="${kayttaja.username}">käyttäjä</td>
+                            <td width="30px">
+                                <form th:action="@{/kayttajat/poista/{kayttajaId}(kayttajaId=${kayttaja.id})}" th:method="DELETE">
+                                    <input type="submit" value="Poista" />
+                                </form>
+                            </td>
+                        </tr>
+                    </table>  
+
+                </center>
+            </div>
+        </center>
+    </body>
+</html>

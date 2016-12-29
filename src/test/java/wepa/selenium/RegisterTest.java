@@ -32,7 +32,7 @@ public class RegisterTest extends FluentTest {
         click(find("a").first());
         assertEquals("Register", title());
 
-        fill(find("#username")).with("käyttäjä");
+        fill(find("#username")).with("kayttaja");
         fill(find("#password")).with("salasana");
         submit(find("form").first());
 
