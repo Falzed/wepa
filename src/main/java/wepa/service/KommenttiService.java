@@ -21,20 +21,25 @@ public class KommenttiService {
     @Autowired
     private KuvaRepository kuvaRepository;
     
+    @Autowired
+    private LoggedInKayttajaService loggedInKayttajaService;
+    
     //Talletetaan kuvakohtainen kommentti
+    @Transactional
     public Kommentti postKommentti(Long kuvaId, String sisalto) {
         Kuva kuva = kuvaRepository.findOne(kuvaId);
         Kommentti kommentti = new Kommentti();
         kommentti.setSisalto(sisalto);
-        
-        Kayttaja kt = new Kayttaja();
-        kt.setUsername("testiKayttaja");
-        kommentti.setKayttaja(kt);
-        
         kommentti = kommenttiRepository.save(kommentti);
+        
+        Kayttaja kayttaja = loggedInKayttajaService.getAuthenticatedKayttaja();
+        kommentti.setKayttaja(kayttaja);
         
         kuva.getKommentit().add(kommentti);
         kommentti.setKuva(kuva);
+        
+        Date postTime = new Date(System.currentTimeMillis());
+        kommentti.setAika(postTime);
         
         kuvaRepository.save(kuva);
         kommentti = kommenttiRepository.save(kommentti);

@@ -20,7 +20,6 @@ import wepa.domain.Tunniste;
 import wepa.service.TunnisteService;
 
 @Controller
-@RequestMapping("tunnisteet")
 public class TunnisteController {
 
     @Autowired
@@ -28,7 +27,7 @@ public class TunnisteController {
 
 
     //Haetaan tunnisteet
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/tunnisteet", method = RequestMethod.GET)
     public String getTunnisteet(Model model) {
         model.addAttribute("tunnisteet", tunnisteService.findAll());
         model.addAttribute("tunniste", new Tunniste());
@@ -37,7 +36,7 @@ public class TunnisteController {
 
 
     //Luodaan uusi tunniste
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/tunnisteet", method = RequestMethod.POST)
     public String lisaaTunniste(@Valid @ModelAttribute Tunniste tunniste,
             BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
@@ -52,25 +51,26 @@ public class TunnisteController {
     }
     
     //Liitetään tunniste kuvaan
-    @RequestMapping(value="/{tunnisteId}/{kuvaId}", method = RequestMethod.POST)
-    public String lisaaTunnisteKuvaan(@PathVariable Long tunnisteId, @PathVariable Long kuvaId) {
-        tunnisteService.lisaatunnisteKuvaan(tunnisteId, kuvaId);
+    @RequestMapping(value="/{kuvaId}/lisaatunniste", method = RequestMethod.POST)
+    public String lisaaTunnisteKuvaan(@PathVariable Long kuvaId, @RequestParam Long tunnisteId) {
+        tunnisteService.lisaatunnisteKuvaan(kuvaId, tunnisteId);
         return "redirect:/pics/"+kuvaId;
     }
     
 
     //Poistetaan tunniste kuvasta
-    @RequestMapping(value="/{tunnisteId}/{kuvaId}", method = RequestMethod.DELETE)
-    public String poistaTunnisteKuvasta(@PathVariable Long tunnisteId, @PathVariable Long kuvaId) {
-        tunnisteService.poistaTunnisteKuvasta(tunnisteId, kuvaId);
+    @RequestMapping(value="/{kuvaId}/poistatunniste/{tunnisteId}", method = RequestMethod.DELETE)
+    public String poistaTunnisteKuvasta(@PathVariable Long kuvaId, @PathVariable Long tunnisteId) {
+        tunnisteService.poistaTunnisteKuvasta(kuvaId, tunnisteId);
         return "redirect:/pics/"+kuvaId;
     }
     
 
     //Poistetaan tunniste kokonaan
-    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-    public void deleteTunniste(@PathVariable Long id) {
-        tunnisteService.delete(id);
+    @RequestMapping(value="/tunnisteet/{tunnisteId}", method = RequestMethod.DELETE)
+    public String deleteTunniste(@PathVariable Long tunnisteId) {
+        tunnisteService.delete(tunnisteId);
+        return "redirect:/tunnisteet";
     }
 
 }

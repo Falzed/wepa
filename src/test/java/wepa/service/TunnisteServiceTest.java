@@ -36,6 +36,7 @@ public class TunnisteServiceTest {
     //Luodaan uusi tagi ja testataan että se löytyy tunnisteista.
     //Seuraavaksi poistetaan kyseinen tagi ja varmistetaan ettei se enää ole olemasa
     @Test
+    @Transactional
     public void testAddAndDeleteTag() {
             Tunniste tunniste = new Tunniste();
             tunniste.setNimi("Testi");
@@ -64,11 +65,11 @@ public class TunnisteServiceTest {
 
         tunnisteService.addTag(tunniste);
 
-        tunnisteService.lisaatunnisteKuvaan(tunniste.getId(), kuva.getId());
+        tunnisteService.lisaatunnisteKuvaan(kuva.getId(), tunniste.getId());
 
         assertTrue(kuvaService.getKuvanTunnisteet(kuva.getId()).contains(tunniste));
 
-        tunnisteService.poistaTunnisteKuvasta(tunniste.getId(), kuva.getId());
+        tunnisteService.poistaTunnisteKuvasta(kuva.getId(), tunniste.getId());
 
         assertFalse(kuvaService.getKuvanTunnisteet(kuva.getId()).contains(tunniste));
 

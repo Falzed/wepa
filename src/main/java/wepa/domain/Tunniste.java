@@ -1,5 +1,6 @@
 package wepa.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -14,7 +15,7 @@ public class Tunniste extends AbstractPersistable<Long>{
     private String nimi;
     
     @ManyToMany
-    List<Kuva> kuvat;
+    private List<Kuva> kuvat;
     
     public String getNimi() {
         return nimi;
@@ -22,6 +23,17 @@ public class Tunniste extends AbstractPersistable<Long>{
     
     public void setNimi(String nimi) {
         this.nimi = nimi;
+    }
+
+    public List<Kuva> getKuvat() {
+        if (this.kuvat == null) {
+            this.kuvat = new ArrayList<Kuva>() {};
+        }
+        return kuvat;
+    }
+
+    public void setKuvat(List<Kuva> kuvat) {
+        this.kuvat = kuvat;
     }
     
 }
