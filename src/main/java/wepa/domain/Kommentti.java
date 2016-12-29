@@ -5,11 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.data.jpa.repository.Temporal;
 
 @Entity
 public class Kommentti extends AbstractPersistable<Long> {
@@ -17,8 +17,14 @@ public class Kommentti extends AbstractPersistable<Long> {
     @ManyToOne
     @JoinColumn
     private Kuva kuva;
+    
+    @ManyToOne
+    @JoinColumn
     private Kayttaja kayttaja;
-    private Timestamp aika; 
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date aika; 
+    
     @NotBlank(message = "Kommentti ei voi olla tyhjä")
     @Length(min = 1, max = 300, message = "Kommentin pituus 1-300 merkkiä")
     private String sisalto;
@@ -44,11 +50,11 @@ public class Kommentti extends AbstractPersistable<Long> {
         return kayttaja.getUsername();
     }
 
-    public Timestamp getAika() {
+    public Date getAika() {
         return aika;
     }
 
-    public void setAika(Timestamp aika) {
+    public void setAika(Date aika) {
         this.aika = aika;
     }
 

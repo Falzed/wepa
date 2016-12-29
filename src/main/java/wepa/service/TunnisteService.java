@@ -1,6 +1,7 @@
 package wepa.service;
 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wepa.domain.Kuva;
@@ -31,28 +32,51 @@ public class TunnisteService {
         return tunnisteRepository.findByNimi(nimi);
     }
     
-    public void delete(Long id) {
-        tunnisteRepository.delete(id);
+    // Tunnisteen poistaminen
+    @Transactional
+    public void delete(Long tunnisteId) {
+        Tunniste tunniste = tunnisteRepository.findOne(tunnisteId);
+        for (Kuva kuva : tunniste.getKuvat()) {
+            kuva.getTunnisteet().remove(tunniste);
+        }
+        
+        tunnisteRepository.delete(tunnisteId);
     }
     
     //Tunnisteen lisääminen tietylle kuvalle
-    public void lisaatunnisteKuvaan(Long tunnisteId, Long kuvaId) {
+    public void lisaatunnisteKuvaan(Long kuvaId, Long tunnisteId) {
         if(tunnisteRepository.findOne(tunnisteId) == null ||
                 kuvaRepository.findOne(kuvaId) == null) {
             return;
         }
+        
         Kuva kuva = kuvaRepository.findOne(kuvaId);
-        kuva.getTunnisteet().add(tunnisteRepository.findOne(tunnisteId));
+        Tunniste tunniste = tunnisteRepository.findOne(tunnisteId);
+        
+        if (kuva.getTunnisteet().contains(tunniste)) {
+            return;
+        }
+        
+        kuva.getTunnisteet().add(tunniste);
+        tunniste.getKuvat().add(kuva);
+        
         kuvaRepository.save(kuva);
+        tunnisteRepository.save(tunniste);
     }
     
     //Tunnisteen poistaminen tietyltä kuvalta
-    public void poistaTunnisteKuvasta(Long tunnisteId, Long kuvaId) {
+    public void poistaTunnisteKuvasta(Long kuvaId, Long tunnisteId) {
         Kuva kuva = kuvaRepository.findOne(kuvaId);
-        if(!kuva.getTunnisteet().contains(tunnisteRepository.findOne(tunnisteId))) {
+        Tunniste tunniste = tunnisteRepository.findOne(tunnisteId);
+        
+        if(!kuva.getTunnisteet().contains(tunniste)) {
             return;
         }
-        kuva.getTunnisteet().remove(tunnisteRepository.findOne(tunnisteId));
+        
+        kuva.getTunnisteet().remove(tunniste);
+        tunniste.getKuvat().remove(kuva);
+        
         kuvaRepository.save(kuva);
+        tunnisteRepository.save(tunniste);
     }
 }

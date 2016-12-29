@@ -17,6 +17,7 @@ import wepa.repository.KommenttiRepository;
 import wepa.repository.KuvaRepository;
 import wepa.service.KuvaService;
 import wepa.service.TykkaysService;
+import wepa.service.TunnisteService;
 
 @Controller
 @RequestMapping("/pics")
@@ -27,6 +28,9 @@ public class KuvaController {
     
     @Autowired
     private TykkaysService tykkaysService;
+    
+    @Autowired
+    private TunnisteService tunnisteService;
 
     //Haetaan kaikki kuvat
     @Transactional
@@ -45,6 +49,7 @@ public class KuvaController {
         model.addAttribute("kommentit", kuvaService.getKuvanKommentit(id));
         model.addAttribute("tykkaykset", tykkaysService.tykkayksia(id));
         model.addAttribute("kommentti", new Kommentti());
+        model.addAttribute("tunnisteet", tunnisteService.findAll());
         return "pic";
     }
 
