@@ -29,8 +29,8 @@ public class TunnisteTest extends FluentTest {
     public void addingTagWorks() {
         goTo("http://localhost:" + port);
 
-        fill(find("#username")).with("käyttäjä");
-        fill(find("#password")).with("salasana");
+        fill(find("#username")).with("admin");
+        fill(find("#password")).with("admin");
         submit(find("form").first());
 
         goTo("http://localhost:" + port + "/tunnisteet");

@@ -12,12 +12,12 @@
             <form method="POST" th:action="@{/authenticate}">
                     <span class="text-box">
                         <label class="s-user"></label>
-                        <input type="text" name="username" placeholder="Username" />
+                        <input type="text" name="username" id="username" placeholder="Username" />
                         <br/>
                     </span>
                     <span class="text-box">
                         <label class="s-lock"> </label>
-                        <input type="password" name="password" placeholder="password" /> 
+                        <input type="password" name="password" id="password" placeholder="password" /> 
                         <br/><br/>
                     </span>
                 <input type="submit" value="Sign in" />
