@@ -77,7 +77,7 @@ public class KuvaController {
     }
     
     //Kuvan poistaminen
-    @Secured("ADMIN")
+//    @Secured("ADMIN")
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
     public String deletePicture(@PathVariable Long id) {
         kuvaService.deleteKuva(id);
