@@ -15,8 +15,8 @@ public class Kayttaja extends AbstractPersistable<Long> {
     @Length(min = 4, max = 20, message = "Käyttäjätunnuksen pituus 4-20 merkkiä")
     private String username;
     
-    @NotBlank(message = "Salasana ei voi olla tyhjä")
-//    @Length(min = 4, max = 2000, message = "Salasanan pituus 4-20 merkkiä")
+    @NotBlank(message = "Salasanan on oltava 4-20 merkkiä")
+    @Length(min = 4, max = 2000)
     private String password;
     
     private String salt;
@@ -36,6 +36,10 @@ public class Kayttaja extends AbstractPersistable<Long> {
     }
 
     public void setPassword(String password) {
+        if (password.isEmpty() || password == null || password.length() < 4 || password.length() > 20) {
+            return;
+        }
+        
         salt = BCrypt.gensalt();
         this.password = BCrypt.hashpw(password, salt);
     }
