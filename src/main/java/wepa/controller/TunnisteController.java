@@ -7,6 +7,7 @@ package wepa.controller;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -59,6 +60,7 @@ public class TunnisteController {
     
 
     //Poistetaan tunniste kuvasta
+    @Secured("ADMIN")
     @RequestMapping(value="/{kuvaId}/poistatunniste/{tunnisteId}", method = RequestMethod.DELETE)
     public String poistaTunnisteKuvasta(@PathVariable Long kuvaId, @PathVariable Long tunnisteId) {
         tunnisteService.poistaTunnisteKuvasta(kuvaId, tunnisteId);
@@ -75,6 +77,7 @@ public class TunnisteController {
     
 
     //Poistetaan tunniste kokonaan
+    @Secured("ADMIN")
     @RequestMapping(value="/tunnisteet/{tunnisteId}", method = RequestMethod.DELETE)
     public String deleteTunniste(@PathVariable Long tunnisteId) {
         tunnisteService.delete(tunnisteId);

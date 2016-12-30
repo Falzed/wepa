@@ -2,6 +2,7 @@ package wepa.controller;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +45,7 @@ public class KommenttiController {
 
 
     //Kommentin poistaminen
+    @Secured("ADMIN")
     @RequestMapping(value = "/pics/{id}/{kommenttiId}", method = RequestMethod.DELETE)
     public String deleteKommentti(@PathVariable Long id, @PathVariable Long kommenttiId) {
         kommenttiService.deleteKommentti(id, kommenttiId);

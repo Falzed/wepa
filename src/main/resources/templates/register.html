@@ -6,27 +6,25 @@
         <title>Register</title>
     </head>
     <body><center>
-        <div class="sign-in-box">
-            <center>
-            <h2>Create an account</h2>
-            <form method="POST" th:action="@{/kayttajat}" th:object="${kayttaja}">
-                
-                    <span class="text-box">
-                        <label class="s-user"></label>
-                        <input type="text" name="username" id="username" placeholder="Username" />
+            <div class="sign-in-box">
+                <center>
+                    <h2>Create an account</h2>
+                    <form method="POST" th:action="@{/kayttajat}" th:object="${kayttaja}">
+
+                        <input type="text" name="username" id="username" th:field="*{username}" placeholder="Username" />
                         <br/>
-                    </span>
-                    <span class="text-box">
-                        <label class="s-lock"></label>
-                        <input type="password" name="password" id="password" placeholder="Password" />
+                        <p th:if="${#fields.hasErrors('username')}" th:errors='*{username}'></p>
+
+                        <input type="password" name="password" id="password" th:field="*{password}" placeholder="Password" />
                         <br/>
-                    </span>
-                <br/>
-                <input type="submit" value="Create account" />
-            </form>
-            
-                
-            </center></div>
+                        <p th:if="${#fields.hasErrors('password')}" th:errors='*{password}'></p>
+                        <br/>
+                        
+                        <input type="submit" value="Create account" />
+                    </form>
+
+
+                </center></div>
         </center>
     </body>
 </html>

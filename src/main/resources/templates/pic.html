@@ -37,7 +37,6 @@
             <table>
                 <tr>
                     <td th:if="${tykkaykset != null}" id="next">
-                        <!--<span style="font-size: 20px">&hearts; </span> &nbsp;-->
                         <span th:text="${tykkaykset}">tykkäyksiä</span> tykkäys(tä) &nbsp; 
                     </td>
 
@@ -57,10 +56,10 @@
             <table width="670px"> 
                 <tr th:each="kommentti: ${kommentit}">
                     <td width="100px" th:text="${kommentti.kayttajanNimi}">käyttäjä</td>
-                    <td width="420px" th:text="${kommentti.sisalto}">kommentti</td>
+                    <td width="350px" th:text="${kommentti.sisalto}">kommentti</td>
                     <td width="120px" th:text="${#calendars.format(kommentti.aika,'dd MMMM yyyy HH:mm')}">aika</td>
-                    <td width="30px">
-                        <form th:action="@{/pics/{id}/{kommenttiId}(id=${kuva.id}, kommenttiId=${kommentti.id})}" th:method="DELETE">
+                    <td width="100px">
+                        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/pics/{id}/{kommenttiId}(id=${kuva.id}, kommenttiId=${kommentti.id})}" th:method="DELETE">
                             <input type="submit" value="Poista" />
                         </form>
                     </td>
@@ -78,6 +77,13 @@
                 <br/>
                 <input type="submit" value="Lähetä"/>
             </form>
+            
+            <br/>
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <form th:action="@{/{id} (id=${kuva.id})}" method="DELETE">
+                    <input type="submit" value="Poista kuva"/>
+                </form>
+            </div>
             </div>
         
         <br/>

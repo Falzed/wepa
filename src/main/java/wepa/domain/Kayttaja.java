@@ -2,15 +2,23 @@ package wepa.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Entity
 public class Kayttaja extends AbstractPersistable<Long> {
 
+    @NotBlank(message = "Käyttäjätunnus ei voi olla tyhjä")
     @Column(unique = true)
+    @Length(min = 4, max = 20, message = "Käyttäjätunnuksen pituus 4-20 merkkiä")
     private String username;
+    
+    @NotBlank(message = "Salasana ei voi olla tyhjä")
+    @Length(min = 4, max = 2000, message = "Salasanan pituus 4-20 merkkiä")
     private String password;
+    
     private String salt;
     
     private String authority;
