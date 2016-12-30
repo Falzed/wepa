@@ -67,9 +67,9 @@
                             <td width="350px" th:text="${kommentti.sisalto}">kommentti</td>
                             <td width="120px" th:text="${#calendars.format(kommentti.aika,'dd MMMM yyyy HH:mm')}">aika</td>
                             <td width="100px">
-                                <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/pics/{id}/{kommenttiId}(id=${kuva.id}, kommenttiId=${kommentti.id})}" th:method="DELETE">
+<!--                                <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/pics/{id}/{kommenttiId}(id=${kuva.id}, kommenttiId=${kommentti.id})}" th:method="DELETE">
                                     <input type="submit" value="Poista" />
-                                </form>
+                                </form>-->
                             </td>
                         </tr>
                     </table>  
@@ -87,11 +87,11 @@
                 </form>
 
                 <br/>
-                <div sec:authorize="hasAuthority('ADMIN')">
+<!--                <div sec:authorize="hasAuthority('ADMIN')">
                     <form th:action="@{/pics/{id} (id=${kuva.id})}" method="DELETE">
                         <input type="submit" value="Poista kuva"/>
                     </form>
-                </div>
+                </div>-->
             </div>
 
             <br/>

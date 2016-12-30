@@ -49,12 +49,12 @@ public class KommenttiController {
 
     //Kommentin poistaminen
 //    @Secured("ROLE_ADMIN")
-    @RequestMapping(value = "/pics/{id}/{kommenttiId}", method = RequestMethod.DELETE)
-    public String deleteKommentti(@PathVariable Long id, @PathVariable Long kommenttiId) {
-        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
-            kommenttiService.deleteKommentti(id, kommenttiId);
-        }
-        return "redirect:/pics/{id}";
-    }
+//    @RequestMapping(value = "/pics/{id}/{kommenttiId}", method = RequestMethod.DELETE)
+//    public String deleteKommentti(@PathVariable Long id, @PathVariable Long kommenttiId) {
+//        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
+//            kommenttiService.deleteKommentti(id, kommenttiId);
+//        }
+//        return "redirect:/pics/{id}";
+//    }
 
 }

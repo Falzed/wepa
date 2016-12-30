@@ -83,12 +83,12 @@ public class KuvaController {
     
     //Kuvan poistaminen
 //    @Secured("ADMIN")
-    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-    public String deletePicture(@PathVariable Long id) {
-        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
-        kuvaService.deleteKuva(id);
-        }
-        return "redirect:/pics";
-    }
+//    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+//    public String deletePicture(@PathVariable Long id) {
+//        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
+//        kuvaService.deleteKuva(id);
+//        }
+//        return "redirect:/pics";
+//    }
     
 }
