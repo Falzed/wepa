@@ -50,7 +50,6 @@ public class KommenttiService {
 
     //Poistetaan kuvakohtainen kommentti
     @Transactional
-    @Secured("ADMIN")
     public void deleteKommentti(Long kuvaId, Long kommenttiId) {
 //        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
             Kommentti kommentti = kommenttiRepository.findOne(kommenttiId);
