@@ -1,6 +1,7 @@
 package wepa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,17 +26,17 @@ public class KayttajaController {
     }
     
     // Käyttäjälistan näyttäminen
-    //@Secured("ADMIN")
+    @Secured("ADMIN")
     @RequestMapping(method = RequestMethod.GET)
     public String viewAll(Model model) {
         model.addAttribute("kayttajat", kayttajaRepository.findAll());
         return "kayttajat";
     }
     
-    //@Secured("ADMIN")
-//    @RequestMapping(value = "/poista/{kayttajaId}", method = RequestMethod.GET)
-//    public String deleteKayttaja(@PathVariable Long kayttajaId) {
-//        return "kayttajat";
-//    }
+    @Secured("ADMIN")
+    @RequestMapping(value = "/poista/{kayttajaId}", method = RequestMethod.GET)
+    public String deleteKayttaja(@PathVariable Long kayttajaId) {
+        return "kayttajat";
+    }
     
 }

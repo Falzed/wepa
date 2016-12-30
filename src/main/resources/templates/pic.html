@@ -55,7 +55,7 @@
         
             <table width="670px"> 
                 <tr th:each="kommentti: ${kommentit}">
-                    <td width="100px" th:text="${kommentti.kayttajanNimi}">käyttäjä</td>
+                    <td width="100px" th:text="${kommentti.kayttaja.username}">käyttäjä</td>
                     <td width="350px" th:text="${kommentti.sisalto}">kommentti</td>
                     <td width="120px" th:text="${#calendars.format(kommentti.aika,'dd MMMM yyyy HH:mm')}">aika</td>
                     <td width="100px">
