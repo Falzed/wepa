@@ -1,97 +1,104 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">>
     <head lang="en">
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <meta charset="UTF-8" />
         <title>Kuvapalvelu</title>
     </head>
+    
     <body>
+        <header th:replace="fragments/header :: header">
+            <p>header with links etc</p>
+        </header>
+
+
+
         <center>
-           
-        <div><center>
-            <img th:src="@{/pics/{id}/content(id=${kuva.id})}"/>
+            <div><center>
+                    <img th:src="@{/pics/{id}/content(id=${kuva.id})}"/>
 
-            <h4>Tunnisteet: </h4>
-            <ul>
-                <li th:each="tunniste : ${kuva.tunnisteet}">
-                    <a th:href="@{/tunnisteet/{tunnisteId}(tunnisteId=${tunniste.id})}" th:text="${tunniste.nimi}">Tunniste</a>
-                    <form th:action="@{/{kuvaId}/poistatunniste/{tunnisteId}(kuvaId=${kuva.id}, tunnisteId=${tunniste.id})}" th:method="DELETE">
-                        <input type="submit" value="Poista" />
+                    <h4>Tunnisteet: </h4>
+                    <ul>
+                        <li th:each="tunniste : ${kuva.tunnisteet}">
+                            <a th:href="@{/tunnisteet/{tunnisteId}(tunnisteId=${tunniste.id})}" th:text="${tunniste.nimi}">Tunniste</a>
+                            <form th:action="@{/{kuvaId}/poistatunniste/{tunnisteId}(kuvaId=${kuva.id}, tunnisteId=${tunniste.id})}" th:method="DELETE">
+                                <input type="submit" value="Poista" />
+                            </form>
+                        </li>
+                    </ul>
+                    <br/>
+
+                    <h4>Lisää tunniste: </h4>
+                    <form method="POST" th:action="@{/{kuvaId}/lisaatunniste(kuvaId=${kuva.id})}">
+                        <select name="tunnisteId">
+                            <option th:each="tunniste : ${tunnisteet}" th:value="${tunniste.id}" th:text="${tunniste.nimi}">tunniste</option>
+                        </select>
+                        <input type="submit" value="Lisää" id="tunnisteId"/>
                     </form>
-                </li>
-            </ul>
-        <br/>
+                    <a th:href="@{/tunnisteet}">Lisää uusia tunnisteita!</a>
 
-            <h4>Lisää tunniste: </h4>
-            <form method="POST" th:action="@{/{kuvaId}/lisaatunniste(kuvaId=${kuva.id})}">
-                <select name="tunnisteId">
-                    <option th:each="tunniste : ${tunnisteet}" th:value="${tunniste.id}" th:text="${tunniste.nimi}">tunniste</option>
-                </select>
-                <input type="submit" value="Lisää" id="tunnisteId"/>
-            </form>
 
-            
-            <br/>
-            
-            
-            <table>
-                <tr>
-                    <td th:if="${tykkaykset != null}" id="next">
-                        <span th:text="${tykkaykset}">tykkäyksiä</span> tykkäys(tä) &nbsp; 
-                    </td>
+                    <br/>
 
-                    <td id="next">
-                        <form th:action="@{/pics/{id}/tykkaa(id=${kuva.id})}" method="POST">
-                            <input type="submit" value="Tykkää"/>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-            
-        
-        <br/>
-        
-        <h2>kommentit</h2>
-        
-            <table width="670px"> 
-                <tr th:each="kommentti: ${kommentit}">
-                    <td width="100px" th:text="${kommentti.kayttajanNimi}">käyttäjä</td>
-                    <td width="100px" th:text="${kommentti.kayttaja.username}">käyttäjä</td>
-                    <td width="350px" th:text="${kommentti.sisalto}">kommentti</td>
-                    <td width="120px" th:text="${#calendars.format(kommentti.aika,'dd MMMM yyyy HH:mm')}">aika</td>
-                    <td width="100px">
-                        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/pics/{id}/{kommenttiId}(id=${kuva.id}, kommenttiId=${kommentti.id})}" th:method="DELETE">
-                            <input type="submit" value="Poista" />
-                        </form>
-                    </td>
-                </tr>
-            </table>  
-            </center>
-            <br/>
-            
-            <h2>Lisää uusi kommentti</h2>
-            
-            
-            <form th:action="@{/pics/{id}/comment (id=${kuva.id})}" method="POST" th:object="${kommentti}">
-                <textarea name="sisalto" style="height:70px; width:400px;"></textarea>
-                <p th:if="${#fields.hasErrors('sisalto')}" th:errors='*{sisalto}'></p>
+
+                    <table>
+                        <tr>
+                            <td th:if="${tykkaykset != null}" id="next">
+                                <span th:text="${tykkaykset}">tykkäyksiä</span> tykkäys(tä) &nbsp; 
+                            </td>
+
+                            <td id="next">
+                                <form th:action="@{/pics/{id}/tykkaa(id=${kuva.id})}" method="POST">
+                                    <input type="submit" value="Tykkää"/>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                    <br/>
+
+                    <h2>kommentit</h2>
+
+                    <table width="670px"> 
+                        <tr th:each="kommentti: ${kommentit}">
+                            <td width="100px" th:text="${kommentti.kayttajanNimi}">käyttäjä</td>
+                            <td width="100px" th:text="${kommentti.kayttaja.username}">käyttäjä</td>
+                            <td width="350px" th:text="${kommentti.sisalto}">kommentti</td>
+                            <td width="120px" th:text="${#calendars.format(kommentti.aika,'dd MMMM yyyy HH:mm')}">aika</td>
+                            <td width="100px">
+                                <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/pics/{id}/{kommenttiId}(id=${kuva.id}, kommenttiId=${kommentti.id})}" th:method="DELETE">
+                                    <input type="submit" value="Poista" />
+                                </form>
+                            </td>
+                        </tr>
+                    </table>  
+                </center>
                 <br/>
-                <input type="submit" value="Lähetä"/>
-            </form>
-            
-            <br/>
-            <div sec:authorize="hasAuthority('ADMIN')">
-                <form th:action="@{/pics/{id} (id=${kuva.id})}" method="DELETE">
-                    <input type="submit" value="Poista kuva"/>
+
+                <h2>Lisää uusi kommentti</h2>
+
+
+                <form th:action="@{/pics/{id}/comment (id=${kuva.id})}" method="POST" th:object="${kommentti}">
+                    <textarea name="sisalto" style="height:70px; width:400px;"></textarea>
+                    <p th:if="${#fields.hasErrors('sisalto')}" th:errors='*{sisalto}'></p>
+                    <br/>
+                    <input type="submit" value="Lähetä"/>
                 </form>
+
+                <br/>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <form th:action="@{/pics/{id} (id=${kuva.id})}" method="DELETE">
+                        <input type="submit" value="Poista kuva"/>
+                    </form>
+                </div>
             </div>
-            </div>
-        
-        <br/>
-        
-        <a th:href="@{~/pics}">Takaisin listaukseen</a>
-        
-        
+
+            <br/>
+
+            <a th:href="@{~/pics}">Takaisin listaukseen</a>
+
+
         </center>
     </body>
 </html>

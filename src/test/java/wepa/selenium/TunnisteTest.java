@@ -35,7 +35,7 @@ public class TunnisteTest extends FluentTest {
 
         goTo("http://localhost:" + port + "/tunnisteet");
         fill(find("#nimi")).with("ensimmäinen");
-        submit(find("form").first());
+        submit(find("#tunnistelomake"));
         
         assertTrue(pageSource().contains("ensimmäinen"));
     }

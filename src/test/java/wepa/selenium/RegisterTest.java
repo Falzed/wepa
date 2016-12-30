@@ -29,12 +29,12 @@ public class RegisterTest extends FluentTest {
     public void registeringRedirectsToSignIn() {
         goTo("http://localhost:" + port);
 
-        click(find("a").first());
-        assertEquals("Register", title());
+        click(find("#linkkirekisterointiin"));
+        assertTrue(pageSource().contains("Register"));
 
         fill(find("#username")).with("kayttaja");
         fill(find("#password")).with("salasana");
-        submit(find("form").first());
+        submit(find("#registerlomake"));
 
         assertTrue(pageSource().contains("Sign in"));
     }
