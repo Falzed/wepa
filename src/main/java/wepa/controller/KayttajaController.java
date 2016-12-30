@@ -21,6 +21,7 @@ public class KayttajaController {
     //Käyttäjätunnuksen luominen
     @RequestMapping(method = RequestMethod.POST)
     public String create(@ModelAttribute Kayttaja kayttaja) {
+        kayttaja.setAuthority("USER");
         kayttajaRepository.save(kayttaja);
         return "redirect:/login";
     }
