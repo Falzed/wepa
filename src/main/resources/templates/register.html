@@ -13,10 +13,10 @@
 
 
         <center>
+            <h1>Register</h1>
             <div class="sign-in-box">
                 <center>
-                    <h2>Create an account</h2>
-                    <form method="POST" th:action="@{/kayttajat}" th:object="${kayttaja}">
+                    <form method="POST" th:action="@{/kayttajat}" th:object="${kayttaja}" id="registerlomake">
 
                         <input type="text" name="username" id="username" th:field="*{username}" placeholder="Username" />
                         <br/>
