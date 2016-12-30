@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import wepa.domain.Kuva;
 import wepa.domain.Tunniste;
+import wepa.repository.KuvaRepository;
 import wepa.service.LoggedInKayttajaService;
 import wepa.service.TunnisteService;
 
@@ -28,6 +30,8 @@ public class TunnisteController {
     LoggedInKayttajaService loggedInKayttajaService;
     @Autowired
     TunnisteService tunnisteService;
+    @Autowired
+    KuvaRepository kuvaRepository;
 
     //Haetaan tunnisteet
     @RequestMapping(value = "/tunnisteet", method = RequestMethod.GET)
@@ -60,9 +64,14 @@ public class TunnisteController {
     }
 
     //Poistetaan tunniste kuvasta
-    @Secured("ROLE_ADMIN")
+//    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/{kuvaId}/poistatunniste/{tunnisteId}", method = RequestMethod.DELETE)
     public String poistaTunnisteKuvasta(@PathVariable Long kuvaId, @PathVariable Long tunnisteId) {
+        Kuva kuva = kuvaRepository.findOne(kuvaId);
+        if(kuva.getKayttaja()!=loggedInKayttajaService.getAuthenticatedKayttaja()) {
+            return "redirect:/pics/" + kuvaId;
+        }
+        
         tunnisteService.poistaTunnisteKuvasta(kuvaId, tunnisteId);
         return "redirect:/pics/" + kuvaId;
     }

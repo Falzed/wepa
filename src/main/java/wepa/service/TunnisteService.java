@@ -12,6 +12,9 @@ import wepa.repository.TunnisteRepository;
 @Service
 public class TunnisteService {
     @Autowired
+    LoggedInKayttajaService loggedInKayttajaService; 
+    
+    @Autowired
     KuvaRepository kuvaRepository;
     
     @Autowired
@@ -71,6 +74,7 @@ public class TunnisteService {
     //Tunnisteen poistaminen tietyltä kuvalta
     public void poistaTunnisteKuvasta(Long kuvaId, Long tunnisteId) {
         Kuva kuva = kuvaRepository.findOne(kuvaId);
+        
         Tunniste tunniste = tunnisteRepository.findOne(tunnisteId);
         
         if(!kuva.getTunnisteet().contains(tunniste)) {
