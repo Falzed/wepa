@@ -29,24 +29,26 @@ public class KuvaService {
     public List<Kuva> findByAccount() {
         return kuvaRepository.findByKayttaja(loggedInKayttajaService.getAuthenticatedKayttaja());
     }
-    
+
     public void save(Kuva kuva) {
         kuva.setKayttaja(loggedInKayttajaService.getAuthenticatedKayttaja());
         kuvaRepository.save(kuva);
     }
-    
+
     public List<Kommentti> getKuvanKommentit(Long id) {
-        if(kuvaRepository.findOne(id) == null) {
+        if (kuvaRepository.findOne(id) == null) {
             return null;
         }
         return kuvaRepository.findOne(id).getKommentit();
     }
-    
+
     public List<Tunniste> getKuvanTunnisteet(Long id) {
         return kuvaRepository.findOne(id).getTunnisteet();
     }
-    
+
     public void deleteKuva(Long id) {
-        kuvaRepository.delete(id);
+        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
+            kuvaRepository.delete(id);
+        }
     }
 }

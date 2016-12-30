@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import wepa.domain.Kayttaja;
 import wepa.domain.Kommentti;
@@ -14,16 +15,16 @@ import wepa.repository.KuvaRepository;
 
 @Service
 public class KommenttiService {
-    
+
     @Autowired
     private KommenttiRepository kommenttiRepository;
-    
+
     @Autowired
     private KuvaRepository kuvaRepository;
-    
+
     @Autowired
     private LoggedInKayttajaService loggedInKayttajaService;
-    
+
     //Talletetaan kuvakohtainen kommentti
     @Transactional
     public Kommentti postKommentti(Long kuvaId, String sisalto) {
@@ -31,29 +32,31 @@ public class KommenttiService {
         Kommentti kommentti = new Kommentti();
         kommentti.setSisalto(sisalto);
         kommentti = kommenttiRepository.save(kommentti);
-        
+
         Kayttaja kayttaja = loggedInKayttajaService.getAuthenticatedKayttaja();
         kommentti.setKayttaja(kayttaja);
-        
+
         kuva.getKommentit().add(kommentti);
         kommentti.setKuva(kuva);
-        
+
         Date postTime = new Date(System.currentTimeMillis());
         kommentti.setAika(postTime);
-        
+
         kuvaRepository.save(kuva);
         kommentti = kommenttiRepository.save(kommentti);
-        
+
         return kommentti;
     }
-    
 
     //Poistetaan kuvakohtainen kommentti
     @Transactional
+//    @Secured("ROLE_ADMIN")
     public void deleteKommentti(Long kuvaId, Long kommenttiId) {
-        Kommentti kommentti = kommenttiRepository.findOne(kommenttiId);
-        kuvaRepository.findOne(kuvaId).getKommentit().remove(kommentti);
-        kommenttiRepository.delete(kommentti);
+        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
+            Kommentti kommentti = kommenttiRepository.findOne(kommenttiId);
+            kuvaRepository.findOne(kuvaId).getKommentit().remove(kommentti);
+            kommenttiRepository.delete(kommentti);
+        }
     }
-    
+
 }

@@ -45,7 +45,7 @@ public class KommenttiController {
 
 
     //Kommentin poistaminen
-    @Secured("ADMIN")
+//    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/pics/{id}/{kommenttiId}", method = RequestMethod.DELETE)
     public String deleteKommentti(@PathVariable Long id, @PathVariable Long kommenttiId) {
         kommenttiService.deleteKommentti(id, kommenttiId);
