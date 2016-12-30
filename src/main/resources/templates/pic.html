@@ -81,7 +81,7 @@
             
             <br/>
             <div sec:authorize="hasAuthority('ADMIN')">
-                <form th:action="@{/{id} (id=${kuva.id})}" method="DELETE">
+                <form th:action="@{/pics/{id} (id=${kuva.id})}" method="DELETE">
                     <input type="submit" value="Poista kuva"/>
                 </form>
             </div>
