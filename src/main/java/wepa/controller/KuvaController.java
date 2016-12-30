@@ -40,8 +40,9 @@ public class KuvaController {
     //Haetaan kaikki kuvat
     @Transactional
     @RequestMapping(method = RequestMethod.GET)
-    public String viewOwnPictures(Model model) {
-        model.addAttribute("kuvat", kuvaService.findByAccount());
+    public String viewAllPictures(Model model) {
+//        model.addAttribute("kuvat", kuvaService.findByAccount());
+        model.addAttribute("kuvat", kuvaService.findAll());
         model.addAttribute("count", kuvaService.findAll().size());
         return "pics";
     }
