@@ -60,7 +60,7 @@ public class TunnisteController {
     }
 
     //Poistetaan tunniste kuvasta
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/{kuvaId}/poistatunniste/{tunnisteId}", method = RequestMethod.DELETE)
     public String poistaTunnisteKuvasta(@PathVariable Long kuvaId, @PathVariable Long tunnisteId) {
         tunnisteService.poistaTunnisteKuvasta(kuvaId, tunnisteId);

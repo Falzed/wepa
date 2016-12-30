@@ -26,7 +26,7 @@ public class Kuva extends AbstractPersistable<Long> {
     @OneToMany(mappedBy = "kuva", cascade = CascadeType.ALL)
     private List<Tykkays> tykkaykset;
     
-    @ManyToMany(mappedBy = "kuvat", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "kuvat")
     private List<Tunniste> tunnisteet;
  
     public byte[] getContent() {
