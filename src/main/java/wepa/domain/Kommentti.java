@@ -2,6 +2,7 @@ package wepa.domain;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +19,7 @@ public class Kommentti extends AbstractPersistable<Long> {
     @JoinColumn
     private Kuva kuva;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Kayttaja kayttaja;
     

@@ -23,18 +23,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
-    @Override
-    public void configure(WebSecurity webSecurity) {
-        webSecurity.ignoring().antMatchers("/public/css/**");
-    }
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().sameOrigin();
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/public/css/**", "/login", "/register").permitAll()
+                .antMatchers("/css/**", "/login", "/register").permitAll()
                 .antMatchers(HttpMethod.POST, "/kayttajat").permitAll()
                 .antMatchers("/h2-console*/**").permitAll()
                 .anyRequest().authenticated();
