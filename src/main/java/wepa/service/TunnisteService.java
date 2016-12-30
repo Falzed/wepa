@@ -21,6 +21,10 @@ public class TunnisteService {
         return tunnisteRepository.findAll();
     }
     
+    public Tunniste findOne(Long tunnisteId) {
+        return tunnisteRepository.findOne(tunnisteId);
+    }
+    
     
     //Talletetaan tunniste repositorioon
     public void addTag(Tunniste tag) {

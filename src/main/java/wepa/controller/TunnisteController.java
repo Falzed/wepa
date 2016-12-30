@@ -7,6 +7,7 @@ package wepa.controller;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -59,14 +60,24 @@ public class TunnisteController {
     
 
     //Poistetaan tunniste kuvasta
+    @Secured("ADMIN")
     @RequestMapping(value="/{kuvaId}/poistatunniste/{tunnisteId}", method = RequestMethod.DELETE)
     public String poistaTunnisteKuvasta(@PathVariable Long kuvaId, @PathVariable Long tunnisteId) {
         tunnisteService.poistaTunnisteKuvasta(kuvaId, tunnisteId);
         return "redirect:/pics/"+kuvaId;
     }
     
+    // Haetaan tunnisteeseen liittyvät kuvat
+    @RequestMapping(value = "/tunnisteet/{tunnisteId}", method = RequestMethod.GET)
+    public String getTunniste(Model model, @PathVariable Long tunnisteId) {
+        model.addAttribute("tunniste", tunnisteService.findOne(tunnisteId));
+        return "tunniste";
+    }
+    
+    
 
     //Poistetaan tunniste kokonaan
+    @Secured("ADMIN")
     @RequestMapping(value="/tunnisteet/{tunnisteId}", method = RequestMethod.DELETE)
     public String deleteTunniste(@PathVariable Long tunnisteId) {
         tunnisteService.delete(tunnisteId);
