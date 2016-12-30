@@ -54,15 +54,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //    public PasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
-    @Configuration
-    protected static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
-
-        @Autowired
-        private JpaAuthenticationProvider jpaAuthenticationProvider;
-
-        @Override
-        public void init(AuthenticationManagerBuilder auth) throws Exception {
-            auth.authenticationProvider(jpaAuthenticationProvider);
-        }
-    }
+//    @Configuration
+//    protected static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
+//
+//        @Autowired
+//        private JpaAuthenticationProvider jpaAuthenticationProvider;
+//
+//        @Override
+//        public void init(AuthenticationManagerBuilder auth) throws Exception {
+//            auth.authenticationProvider(jpaAuthenticationProvider);
+//        }
+//    }
 }

@@ -14,7 +14,7 @@
             <h4>Tunnisteet: </h4>
             <ul>
                 <li th:each="tunniste : ${kuva.tunnisteet}">
-                    <a th:href="@{/tunnisteet}" th:text="${tunniste.nimi}">Tunniste</a>
+                    <a th:href="@{/tunnisteet/{tunnisteId}(tunnisteId=${tunniste.id})}" th:text="${tunniste.nimi}">Tunniste</a>
                     <form th:action="@{/{kuvaId}/poistatunniste/{tunnisteId}(kuvaId=${kuva.id}, tunnisteId=${tunniste.id})}" th:method="DELETE">
                         <input type="submit" value="Poista" />
                     </form>

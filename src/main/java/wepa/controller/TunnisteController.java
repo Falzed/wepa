@@ -65,6 +65,14 @@ public class TunnisteController {
         return "redirect:/pics/"+kuvaId;
     }
     
+    // Haetaan tunnisteeseen liittyvät kuvat
+    @RequestMapping(value = "/tunnisteet/{tunnisteId}", method = RequestMethod.GET)
+    public String getTunniste(Model model, @PathVariable Long tunnisteId) {
+        model.addAttribute("tunniste", tunnisteService.findOne(tunnisteId));
+        return "tunniste";
+    }
+    
+    
 
     //Poistetaan tunniste kokonaan
     @RequestMapping(value="/tunnisteet/{tunnisteId}", method = RequestMethod.DELETE)

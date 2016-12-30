@@ -11,8 +11,7 @@
         <div>
         <ul>
             <li th:each="tunniste : ${tunnisteet}">
-                <span th:text="${tunniste.nimi}"/>
-                <a th:href ="@{/pics/{id}(id=${tunniste.id})}" />
+                <a th:href ="@{/tunnisteet/{tunnisteId}(tunnisteId=${tunniste.id})}" th:text="${tunniste.nimi}"> tunniste </a>
                 <form th:action="@{/tunnisteet/{tunnisteId}(tunnisteId=${tunniste.id})}" th:method="DELETE">
                     <input type="submit" value="Poista" />
                 </form>

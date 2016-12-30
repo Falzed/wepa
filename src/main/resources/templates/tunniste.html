@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <meta charset="UTF-8" />
+        <title>Kuvapalvelu</title>
+    </head>
+    <body>
+        <center>
+            <h1>Tunnisteella <span th:text="${tunniste.nimi}">tunniste</span> merkityt kuvat</h1>
+
+            <div>
+                <center>
+                    <ul>
+                        <li th:each="kuva : ${tunniste.kuvat}">
+                            <a th:href="@{/pics/{id}(id=${kuva.id})}"><img th:src="@{/pics/{id}/content(id=${kuva.id})}" alt=""/></a>
+                        </li>
+                    </ul>
+                </center>
+            </div>
+        </center>
+    </body>
+</html>
