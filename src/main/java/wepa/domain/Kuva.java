@@ -2,6 +2,7 @@ package wepa.domain;
  
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
@@ -18,13 +19,14 @@ public class Kuva extends AbstractPersistable<Long> {
     
     @ManyToOne
     private Kayttaja kayttaja;
-    @OneToMany(mappedBy = "kuva")
+    
+    @OneToMany(mappedBy = "kuva", cascade = CascadeType.ALL)
     private List<Kommentti> kommentit;
    
-    @OneToMany(mappedBy = "kuva")
+    @OneToMany(mappedBy = "kuva", cascade = CascadeType.ALL)
     private List<Tykkays> tykkaykset;
     
-    @ManyToMany(mappedBy = "kuvat")
+    @ManyToMany(mappedBy = "kuvat", cascade = CascadeType.ALL)
     private List<Tunniste> tunnisteet;
  
     public byte[] getContent() {
