@@ -16,7 +16,7 @@ public class Kayttaja extends AbstractPersistable<Long> {
     private String username;
     
     @NotBlank(message = "Salasana ei voi olla tyhjä")
-    @Length(min = 4, max = 2000, message = "Salasanan pituus 4-20 merkkiä")
+//    @Length(min = 4, max = 2000, message = "Salasanan pituus 4-20 merkkiä")
     private String password;
     
     private String salt;
