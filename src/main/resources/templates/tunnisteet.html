@@ -26,6 +26,9 @@
                 <p th:if="${#fields.hasErrors('nimi')}" th:errors='*{nimi}'></p>
                 <input type="submit" value="Lisää"/>
             </form>
+        
+        <br/>
+        <a th:href="@{~/pics}">Takaisin</a>
 
         </div>
         </center>

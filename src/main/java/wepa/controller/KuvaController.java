@@ -3,6 +3,7 @@ package wepa.controller;
 import java.io.IOException;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -76,9 +77,11 @@ public class KuvaController {
     }
     
     //Kuvan poistaminen
+    @Secured("ADMIN")
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-    public void deletePicture(@PathVariable Long id) {
+    public String deletePicture(@PathVariable Long id) {
         kuvaService.deleteKuva(id);
+        return "redirect:/pics";
     }
     
 }
