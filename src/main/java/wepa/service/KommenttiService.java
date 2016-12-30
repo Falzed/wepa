@@ -53,7 +53,9 @@ public class KommenttiService {
     public void deleteKommentti(Long kuvaId, Long kommenttiId) {
 //        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
             Kommentti kommentti = kommenttiRepository.findOne(kommenttiId);
-            kuvaRepository.findOne(kuvaId).getKommentit().remove(kommentti);
+            Kuva kuva = kuvaRepository.findOne(kuvaId);
+            kuva.getKommentit().remove(kommentti);
+            kuvaRepository.save(kuva);
             kommenttiRepository.delete(kommentti);
 //        }
     }
