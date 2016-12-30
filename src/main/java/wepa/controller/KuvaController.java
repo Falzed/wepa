@@ -17,6 +17,7 @@ import wepa.domain.Kuva;
 import wepa.repository.KommenttiRepository;
 import wepa.repository.KuvaRepository;
 import wepa.service.KuvaService;
+import wepa.service.LoggedInKayttajaService;
 import wepa.service.TykkaysService;
 import wepa.service.TunnisteService;
 
@@ -24,6 +25,9 @@ import wepa.service.TunnisteService;
 @RequestMapping("/pics")
 public class KuvaController {
 
+    @Autowired
+    private LoggedInKayttajaService loggedInKayttajaService;
+    
     @Autowired
     private KuvaService kuvaService;
     
@@ -80,7 +84,9 @@ public class KuvaController {
 //    @Secured("ADMIN")
     @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
     public String deletePicture(@PathVariable Long id) {
+        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
         kuvaService.deleteKuva(id);
+        }
         return "redirect:/pics";
     }
     

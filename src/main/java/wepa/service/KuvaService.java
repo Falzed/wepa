@@ -14,7 +14,7 @@ public class KuvaService {
 
     @Autowired
     KuvaRepository kuvaRepository;
-    
+
     @Autowired
     private LoggedInKayttajaService loggedInKayttajaService;
 
@@ -47,8 +47,8 @@ public class KuvaService {
     }
 
     public void deleteKuva(Long id) {
-        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
+//        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
             kuvaRepository.delete(id);
-        }
+//        }
     }
 }

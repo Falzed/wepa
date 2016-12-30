@@ -14,17 +14,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import wepa.domain.Kommentti;
 import wepa.service.KommenttiService;
 import wepa.service.KuvaService;
+import wepa.service.LoggedInKayttajaService;
 import wepa.service.TykkaysService;
 
 @Controller
 public class KommenttiController {
 
     @Autowired
+    private LoggedInKayttajaService loggedInKayttajaService;
+
+    @Autowired
     private KommenttiService kommenttiService;
-    
+
     @Autowired
     private KuvaService kuvaService;
-    
+
     @Autowired
     private TykkaysService tykkaysService;
 
@@ -43,12 +47,13 @@ public class KommenttiController {
         return "redirect:/pics/{id}";
     }
 
-
     //Kommentin poistaminen
 //    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/pics/{id}/{kommenttiId}", method = RequestMethod.DELETE)
     public String deleteKommentti(@PathVariable Long id, @PathVariable Long kommenttiId) {
-        kommenttiService.deleteKommentti(id, kommenttiId);
+        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
+            kommenttiService.deleteKommentti(id, kommenttiId);
+        }
         return "redirect:/pics/{id}";
     }
 

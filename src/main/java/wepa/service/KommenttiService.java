@@ -52,11 +52,11 @@ public class KommenttiService {
     @Transactional
 //    @Secured("ROLE_ADMIN")
     public void deleteKommentti(Long kuvaId, Long kommenttiId) {
-        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
+//        if (this.loggedInKayttajaService.getAuthenticatedKayttaja().getAuthority().equals("ADMIN")) {
             Kommentti kommentti = kommenttiRepository.findOne(kommenttiId);
             kuvaRepository.findOne(kuvaId).getKommentit().remove(kommentti);
             kommenttiRepository.delete(kommentti);
-        }
+//        }
     }
 
 }
