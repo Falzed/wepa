@@ -5,7 +5,14 @@
         <meta charset="UTF-8" />
         <title>Register</title>
     </head>
-    <body><center>
+
+    <body>
+        <header th:replace="fragments/header :: header">
+            <p>header with links etc</p>
+        </header>
+
+
+        <center>
             <div class="sign-in-box">
                 <center>
                     <h2>Create an account</h2>
@@ -20,10 +27,12 @@
                         <br/>
                         <p th:if="${#fields.hasErrors('password')}" th:errors='*{password}'> salasana virheviestit</p>
                         <br/>
-                        
+
                         <input type="submit" value="Create account" />
                     </form>
-
+                    
+                    <br/>
+                    <a th:href="@{/login}">Takaisin</a>
 
                 </center></div>
         </center>

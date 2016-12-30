@@ -5,7 +5,13 @@
         <meta charset="UTF-8" />
         <title>Kuvapalvelu</title>
     </head>
+    
     <body>
+        <header th:replace="fragments/header :: header">
+            <p>header with links etc</p>
+        </header>
+
+
         <center>
             <h1>Tunnisteella <span th:text="${tunniste.nimi}">tunniste</span> merkityt kuvat</h1>
 
@@ -18,6 +24,9 @@
                     </ul>
                 </center>
             </div>
+            
+            <br/>
+            <a th:href="@{/tunnisteet}">Takaisin</a>
         </center>
     </body>
 </html>

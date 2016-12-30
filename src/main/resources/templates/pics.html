@@ -5,47 +5,33 @@
         <meta charset="UTF-8" />
         <title>Kuvapalvelu</title>
     </head>
+    
     <body>
+        <header th:replace="fragments/header :: header">
+            <p>header with links etc</p>
+        </header>
+
+
         <center>
-        <h1>Kuvapalvelu: (<span th:text="${count}">count</span> kuvaa)</h1>
-        
-        <div>
-            <center>
-        <ul>
-            <li th:each="kuva : ${kuvat}">
-                <a th:href="@{/pics/{id}(id=${kuva.id})}"><img th:src="@{/pics/{id}/content(id=${kuva.id})}" alt=""/></a>
-            </li>
-        </ul>
-        
-<!--        <div th:if="${current != null}">
-            <h2>Comments</h2>
-            <h4>Post one!</h4>
-            <form th:action="@{/pics/{id}(id=${current})}" th:method="POST">
-                <input type="text" name="sisalto"></input>
-                <input type="submit" value="Add!" />
-            </form>
+            <h1><span th:text="${count}">count</span> kuvaa</h1>
 
-            <ul>
-                <li th:each="kommentti : ${comments}">
-                    <span th:text="${kommentti.sisalto}">comment here</span> -
-                    <span th:text="${kommentti.kayttaja.username}"> username</span>
-                    <form th:action="@{/pics/{id}/{kommenttiId}(id=${current}, kommenttiId=${kommentti.id})}" th:method="DELETE">
-                        <input type="submit" value="Remove" />
+            <div>
+                <center>
+                    <ul>
+                        <li th:each="kuva : ${kuvat}">
+                            <a th:href="@{/pics/{id}(id=${kuva.id})}"><img th:src="@{/pics/{id}/content(id=${kuva.id})}" alt=""/></a>
+                        </li>
+                    </ul>
+
+
+                    <h2>lisää uusi kuva</h2>
+
+                    <form method="POST" action="/pics" enctype="multipart/form-data">
+                        <input type="file" name="file" id="file"/>
+                        <input type="submit" value="Lisää"/>
                     </form>
-                </li>
-            </ul>
-        </div>-->
-        
-        <h2>lisää uusi kuva</h2>
-
-        <form method="POST" action="/pics" enctype="multipart/form-data">
-            <input type="file" name="file" id="file"/>
-            <input type="submit" value="Lisää"/>
-        </form>
-            <br/>
-            <a th:href="@{~/tunnisteet}">Tunnisteet</a>
-            </center>
-        </div>
+                </center>
+            </div>
         </center>
     </body>
 </html>

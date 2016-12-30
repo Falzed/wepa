@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+            <link rel="stylesheet" type="text/css" href="/css/style.css" />
+            <meta charset="UTF-8" />
+            <title>Header template</title>
+    </head>
+    <body>
+        <header th:fragment="header">
+            <center>
+                <h1>Kuvapalvelu</h1>
+                <table width="670px">
+                    <tr>
+                        <th><a th:href="@{/pics}">Kuvat</a></th>
+                        <th><a th:href="@{/tunnisteet}">Tunnisteet</a></th>
+                        <th> <form sec:authorize="isAuthenticated()" method="POST" th:action="@{/logout}">
+                                <input type="submit" value="Log out" />
+                            </form>
+                        </th>
+                    </tr>
+                </table>
+            </center>
+        </header>
+    </body>
+</html>

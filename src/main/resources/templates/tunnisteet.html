@@ -1,36 +1,42 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" mlns:sec="http://www.springframework.org/security/tags">>
     <head lang="en">
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <meta charset="UTF-8" />
-        <title>Wepa</title>
+        <title>Kuvapalvelu</title>
     </head>
-    <body><center>
-        <h1>Kuvapalvelu - tunnisteet</h1>
+    
+    <body>
+        <header th:replace="fragments/header :: header">
+            <p>header with links etc</p>
+        </header>
 
-        <div>
-        <ul>
-            <li th:each="tunniste : ${tunnisteet}">
-                <a th:href ="@{/tunnisteet/{tunnisteId}(tunnisteId=${tunniste.id})}" th:text="${tunniste.nimi}"> tunniste </a>
-                <form th:action="@{/tunnisteet/{tunnisteId}(tunnisteId=${tunniste.id})}" th:method="DELETE">
-                    <input type="submit" value="Poista" />
+        <center>
+            <h1>Tunnisteet</h1>
+
+            <div>
+                <ul>
+                    <li th:each="tunniste : ${tunnisteet}">
+                        <a th:href ="@{/tunnisteet/{tunnisteId}(tunnisteId=${tunniste.id})}" th:text="${tunniste.nimi}"> tunniste </a>
+                        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/tunnisteet/{tunnisteId}(tunnisteId=${tunniste.id})}" th:method="DELETE">
+                            <input type="submit" value="Poista" />
+                        </form>
+
+                    </li>
+                </ul>
+
+                <h2>Lisää uusi tunniste</h2>
+
+                <form method="POST" th:action="@{/tunnisteet}" th:object="${tunniste}">
+                    <input type="text" name="nimi" id="nimi"/>
+                    <p th:if="${#fields.hasErrors('nimi')}" th:errors='*{nimi}'></p>
+                    <input type="submit" value="Lisää"/>
                 </form>
 
-            </li>
-        </ul>
+                <br/>
+                <a th:href="@{~/pics}">Takaisin</a>
 
-        <h2>Lisää uusi tunniste</h2>
-
-            <form method="POST" th:action="@{/tunnisteet}" th:object="${tunniste}">
-                <input type="text" name="nimi" id="nimi"/>
-                <p th:if="${#fields.hasErrors('nimi')}" th:errors='*{nimi}'></p>
-                <input type="submit" value="Lisää"/>
-            </form>
-        
-        <br/>
-        <a th:href="@{~/pics}">Takaisin</a>
-
-        </div>
+            </div>
         </center>
     </body>
 </html>

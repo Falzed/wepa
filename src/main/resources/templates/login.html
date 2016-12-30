@@ -5,32 +5,36 @@
         <meta charset="UTF-8" />
         <title>Kuvapalvelu</title>
     </head>
-    <body><center>
-        <div class="sign-in-box">
-            <center>
-            <h2>Sign in</h2>
-            <form method="POST" th:action="@{/authenticate}">
-                    <span class="text-box">
-                        <label class="s-user"></label>
-                        <input type="text" name="username" id="username" placeholder="Username" />
-                        <br/>
-                    </span>
-                    <span class="text-box">
-                        <label class="s-lock"> </label>
-                        <input type="password" name="password" id="password" placeholder="password" /> 
-                        <br/><br/>
-                    </span>
-                <input type="submit" value="Sign in" />
-                <p th:if="${param.error}">Väärä käyttäjätunnus tai salasana. </p>
-            </form>
-                
-                <br/>
-                <a th:href="@{/register}">Create an account</a>
-            </center>
-        </div>
-            <form method="POST" th:action="@{/logout}">
-                <input type="submit" value="Log out" />
-            </form>
+    
+    
+    <body>
+        <header th:replace="fragments/header :: header">
+            <p>header with links etc</p>
+        </header>
+
+        <center>
+            <div class="sign-in-box">
+                <center>
+                    <h2>Sign in</h2>
+                    <form method="POST" th:action="@{/authenticate}">
+                        <span class="text-box">
+                            <label class="s-user"></label>
+                            <input type="text" name="username" id="username" placeholder="Username" />
+                            <br/>
+                        </span>
+                        <span class="text-box">
+                            <label class="s-lock"> </label>
+                            <input type="password" name="password" id="password" placeholder="password" /> 
+                            <br/><br/>
+                        </span>
+                        <input type="submit" value="Sign in" />
+                        <p th:if="${param.error}">Väärä käyttäjätunnus tai salasana. </p>
+                    </form>
+
+                    <br/>
+                    <a th:href="@{/register}">Create an account</a>
+                </center>
+            </div>
         </center>
     </body>
 </html>
